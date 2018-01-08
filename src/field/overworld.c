@@ -1101,7 +1101,7 @@ u8 sav1_map_get_name(void)
     return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum)->regionMapSectionId;
 }
 
-u8 sav1_map_get_battletype(void)
+u8 GetCurrentMapBattleScene(void)
 {
     return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum)->battleType;
 }

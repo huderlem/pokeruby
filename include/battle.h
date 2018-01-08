@@ -681,6 +681,7 @@ void sub_8032638();
 void sub_8032AA8(u8, u8);
 void SetBankFuncToOpponentBufferRunCommand(void);
 void BattleMusicStop(void);
+void sub_8032A38(void);
 
 // asm/battle_9.o
 void SetBankFuncToLinkOpponentBufferRunCommand(void);

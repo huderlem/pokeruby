@@ -114,7 +114,7 @@ bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 a1);
 u8 Overworld_MapTypeIsIndoors(u8);
 // unref_sub_8054260
 u8 sav1_map_get_name();
-// sav1_map_get_battletype
+u8 GetCurrentMapBattleScene(void);
 // ResetSafariZoneFlag_
 bool32 is_c1_link_related_active(void);
 // c1_overworld_normal
