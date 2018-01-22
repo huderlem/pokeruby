@@ -1082,6 +1082,17 @@ bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 mapType)
         return FALSE;
 }
 
+bool8 Overworld_MapTypeIsOutdoors(u8 mapType)
+{
+    if (mapType == MAP_TYPE_ROUTE
+     || mapType == MAP_TYPE_TOWN
+     || mapType == MAP_TYPE_6
+     || mapType == MAP_TYPE_CITY)
+        return TRUE;
+    else
+        return FALSE;
+}
+
 bool8 Overworld_MapTypeIsIndoors(u8 mapType)
 {
     if (mapType == MAP_TYPE_INDOOR

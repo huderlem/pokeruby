@@ -112,6 +112,7 @@ u8 get_map_type_from_warp0(void);
 bool8 is_map_type_1_2_3_5_or_6(u8 a1);
 bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 a1);
 u8 Overworld_MapTypeIsIndoors(u8);
+bool8 Overworld_MapTypeIsOutdoors(u8);
 // unref_sub_8054260
 u8 sav1_map_get_name();
 // sav1_map_get_battletype

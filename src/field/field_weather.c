@@ -12,6 +12,8 @@
 #include "task.h"
 #include "trig.h"
 #include "ewram.h"
+#include "overworld.h"
+#include "rtc.h"
 
 #define MACRO1(color) ((((color) >> 1) & 0xF) | (((color) >> 2) & 0xF0) | (((color) >> 3) & 0xF00))
 
@@ -78,11 +80,14 @@ static void ApplyGammaShift(u8 startPalIndex, u8 numPalettes, s8 gammaIndex);
 static void ApplyGammaShiftWithBlend(u8 startPalIndex, u8 numPalettes, s8 gammaIndex, u8 blendCoeff, u16 blendColor);
 static void ApplyDroughtGammaShiftWithBlend(s8 gammaIndex, u8 blendCoeff, u16 blendColor);
 static void ApplyFogBlend(u8 blendCoeff, u16 blendColor);
+static bool8 FadeInScreen_NormalPaletteWeather(void);
 static bool8 FadeInScreen_RainShowShade(void);
 static bool8 FadeInScreen_Drought(void);
 static bool8 FadeInScreen_Fog1(void);
 static void FadeInScreenWithWeather(void);
 static void DoNothing(void);
+void TryUpdateDayNightTint(void);
+void ApplyDayNightTint(u8 startPalIndex, u8 numPalettes);
 void None_Init(void);
 void None_Main(void);
 bool8 None_Finish(void);
@@ -298,6 +303,9 @@ void Task_WeatherMain(u8 taskId)
             gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_CHANGING_WEATHER;
             gWeatherPtr->currWeather = gWeatherPtr->nextWeather;
             gWeatherPtr->weatherChangeComplete = TRUE;
+
+            // Get time for day-night color tint.
+            RtcCalcLocalTime();
         }
     }
     else
@@ -306,6 +314,7 @@ void Task_WeatherMain(u8 taskId)
     }
 
     gWeatherPalStateFuncs[gWeatherPtr->palProcessingState]();
+    TryUpdateDayNightTint();
 }
 
 void None_Init(void)
@@ -412,6 +421,7 @@ static void UpdateWeatherGammaShift(void)
                 gWeatherPtr->gammaIndex--;
 
             ApplyGammaShift(0, 32, gWeatherPtr->gammaIndex);
+            ApplyDayNightTint(0, 32);
         }
     }
 }
@@ -453,13 +463,31 @@ static void FadeInScreenWithWeather(void)
     case WEATHER_FOG_2:
     case WEATHER_FOG_3:
     default:
-        if (!gPaletteFade.active)
+        if (FadeInScreen_NormalPaletteWeather() == FALSE)
         {
-            gWeatherPtr->gammaIndex = gWeatherPtr->gammaTargetIndex;
+            gWeatherPtr->gammaIndex = 0;
             gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_IDLE;
         }
         break;
     }
+}
+
+bool8 FadeInScreen_NormalPaletteWeather(void)
+{
+    if (gWeatherPtr->fadeScreenCounter == 16)
+        return FALSE;
+
+    if (++gWeatherPtr->fadeScreenCounter >= 16)
+    {
+        ApplyGammaShift(0, 32, 0);
+        ApplyDayNightTint(0, 32);
+        gWeatherPtr->fadeScreenCounter = 16;
+        return FALSE;
+    }
+
+    ApplyGammaShiftWithBlend(0, 32, 0, 16 - gWeatherPtr->fadeScreenCounter, gWeatherPtr->fadeDestColor);
+    ApplyDayNightTint(0, 32);
+    return TRUE;
 }
 
 bool8 FadeInScreen_RainShowShade(void)
@@ -470,11 +498,13 @@ bool8 FadeInScreen_RainShowShade(void)
     if (++gWeatherPtr->fadeScreenCounter >= 16)
     {
         ApplyGammaShift(0, 32, 3);
+        ApplyDayNightTint(0, 32);
         gWeatherPtr->fadeScreenCounter = 16;
         return FALSE;
     }
 
     ApplyGammaShiftWithBlend(0, 32, 3, 16 - gWeatherPtr->fadeScreenCounter, gWeatherPtr->fadeDestColor);
+    ApplyDayNightTint(0, 32);
     return TRUE;
 }
 
@@ -486,11 +516,13 @@ bool8 FadeInScreen_Drought(void)
     if (++gWeatherPtr->fadeScreenCounter >= 16)
     {
         ApplyGammaShift(0, 32, -6);
+        ApplyDayNightTint(0, 32);
         gWeatherPtr->fadeScreenCounter = 16;
         return FALSE;
     }
 
     ApplyDroughtGammaShiftWithBlend(-6, 16 - gWeatherPtr->fadeScreenCounter, gWeatherPtr->fadeDestColor);
+    ApplyDayNightTint(0, 32);
     return TRUE;
 }
 
@@ -501,6 +533,7 @@ bool8 FadeInScreen_Fog1(void)
 
     gWeatherPtr->fadeScreenCounter++;
     ApplyFogBlend(16 - gWeatherPtr->fadeScreenCounter, gWeatherPtr->fadeDestColor);
+    ApplyDayNightTint(16, 16);
     return TRUE;
 }
 
@@ -637,7 +670,6 @@ static void ApplyGammaShiftWithBlend(u8 startPalIndex, u8 numPalettes, s8 gammaI
 
     palOffset = startPalIndex * 16;
     numPalettes += startPalIndex;
-    gammaIndex--;
     curPalIndex = startPalIndex;
 
     while (curPalIndex < numPalettes)
@@ -653,16 +685,26 @@ static void ApplyGammaShiftWithBlend(u8 startPalIndex, u8 numPalettes, s8 gammaI
             u8 *gammaTable;
 
             if (sPaletteGammaTypes[curPalIndex] == GAMMA_NORMAL)
-                gammaTable = gWeatherPtr->gammaShifts[gammaIndex];
+                gammaTable = gWeatherPtr->gammaShifts[gammaIndex - 1];
             else
-                gammaTable = gWeatherPtr->altGammaShifts[gammaIndex];
+                gammaTable = gWeatherPtr->altGammaShifts[gammaIndex - 1];
 
             for (i = 0; i < 16; i++)
             {
+                u8 r, g, b;
                 struct RGBColor baseColor = *(struct RGBColor *)&gPlttBufferUnfaded[palOffset];
-                u8 r = gammaTable[baseColor.r];
-                u8 g = gammaTable[baseColor.g];
-                u8 b = gammaTable[baseColor.b];
+                if (gammaIndex == 0)
+                {
+                    r = baseColor.r;
+                    g = baseColor.g;
+                    b = baseColor.b;
+                }
+                else
+                {
+                    r = gammaTable[baseColor.r];
+                    g = gammaTable[baseColor.g];
+                    b = gammaTable[baseColor.b];
+                }
 
                 // Apply gamma shift and target blend color to the original color.
                 r += ((rBlend - r) * blendCoeff) >> 4;
@@ -805,6 +847,7 @@ void sub_807D5BC(s8 gammaIndex)
     if (gWeatherPtr->palProcessingState == WEATHER_PAL_STATE_IDLE)
     {
         ApplyGammaShift(0, 32, gammaIndex);
+        ApplyDayNightTint(0, 32);
         gWeatherPtr->gammaIndex = gammaIndex;
     }
 }
@@ -826,7 +869,6 @@ void FadeScreen(u8 mode, u8 delay)
 {
     u32 fadeColor;
     bool8 fadeOut;
-    bool8 useWeatherPal;
 
     switch (mode)
     {
@@ -850,38 +892,16 @@ void FadeScreen(u8 mode, u8 delay)
         return;
     }
 
-    switch (gWeatherPtr->currWeather)
-    {
-    case WEATHER_RAIN_LIGHT:
-    case WEATHER_RAIN_MED:
-    case WEATHER_RAIN_HEAVY:
-    case WEATHER_SNOW:
-    case WEATHER_FOG_1:
-    case WEATHER_SHADE:
-    case WEATHER_DROUGHT:
-        useWeatherPal = TRUE;
-        break;
-    default:
-        useWeatherPal = FALSE;
-        break;
-    }
-
     if (fadeOut)
     {
-        if (useWeatherPal)
-            CpuFastCopy(gPlttBufferFaded, gPlttBufferUnfaded, 0x400);
-
+        CpuFastCopy(gPlttBufferFaded, gPlttBufferUnfaded, 0x400);
         BeginNormalPaletteFade(0xFFFFFFFF, delay, 0, 16, fadeColor);
         gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_SCREEN_FADING_OUT;
     }
     else
     {
         gWeatherPtr->fadeDestColor = fadeColor;
-        if (useWeatherPal)
-            gWeatherPtr->fadeScreenCounter = 0;
-        else
-            BeginNormalPaletteFade(0xFFFFFFFF, delay, 16, 0, fadeColor);
-
+        gWeatherPtr->fadeScreenCounter = 0;
         gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_SCREEN_FADING_IN;
         gWeatherPtr->unknown_6CA = 1;
         gWeatherPtr->unknown_6CB = 0;
@@ -923,6 +943,7 @@ void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex)
         if (gWeatherPtr->currWeather != WEATHER_FOG_1)
         {
             ApplyGammaShift(paletteIndex, 1, gWeatherPtr->gammaIndex);
+            ApplyDayNightTint(paletteIndex, 1);
         }
         else
         {
@@ -936,6 +957,7 @@ void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex)
 void ApplyWeatherGammaShiftToPal(u8 paletteIndex)
 {
     ApplyGammaShift(paletteIndex, 1, gWeatherPtr->gammaIndex);
+    ApplyDayNightTint(paletteIndex, 1);
 }
 
 u8 unref_sub_807D894(void)
@@ -1212,4 +1234,141 @@ void PreservePaletteInWeather(u8 preservedPalIndex)
 void ResetPreservedPalettesInWeather(void)
 {
     sPaletteGammaTypes = sBasePaletteGammaTypes;
+}
+
+// Blends the given palette in gPlttBufferFaded with the specified blend color.
+void BlendDayNightPalette(u16 palOffset, u8 coeff, u16 blendColor)
+{
+    int i;
+    s16 rBlend, gBlend, bBlend;
+
+    rBlend = blendColor & 0x1F;
+    gBlend = (blendColor >> 5) & 0x1F;
+    bBlend = (blendColor >> 10) & 0x1F;
+
+    for (i = 0; i < 16; i++)
+    {
+        int colorIndex = i + palOffset;
+        s16 rNew, gNew, bNew;
+
+        struct PlttData *data1 = (struct PlttData *)&gPlttBufferFaded[colorIndex];
+        s8 r = data1->r;
+        s8 g = data1->g;
+        s8 b = data1->b;
+
+        rNew = r + (((rBlend - r) * coeff) / 16);
+        gNew = g + (((gBlend - g) * coeff) / 16);
+        bNew = b + (((bBlend - b) * coeff) / 16);
+
+        gPlttBufferFaded[colorIndex] = RGB(rNew, gNew, bNew);
+    }
+}
+
+struct DayNightTint {
+    u32 timestamp;
+    u8 blendCoeff;
+    struct PlttData color;
+};
+
+#define NUM_DAYNIGHT_TINTS 4
+#define DAYNIGHT_INTERVAL 30
+#define DAYNIGHT_PRECISION 32
+const struct DayNightTint gDayNightTints[NUM_DAYNIGHT_TINTS] = {
+    {
+        .timestamp = 0,
+        .blendCoeff = 4,
+        {
+            .r = 23,
+            .g = 27,
+            .b = 2,
+        },
+    },{
+        .timestamp = DAYNIGHT_INTERVAL,
+        .blendCoeff = 0,
+        {
+            .r = 31,
+            .g = 31,
+            .b = 2,
+        },
+    },{
+        .timestamp = DAYNIGHT_INTERVAL * 2,
+        .blendCoeff = 6,
+        {
+            .r = 27,
+            .g = 15,
+            .b = 2,
+        },
+    },{
+        .timestamp = DAYNIGHT_INTERVAL * 3,
+        .blendCoeff = 4,
+        {
+            .r = 7,
+            .g = 1,
+            .b = 20,
+        },
+    },
+};
+
+u8 GetDayNightTintIndex(int timestamp)
+{
+    int i;
+    for (i = 0; i < NUM_DAYNIGHT_TINTS; i++)
+    {
+        if (timestamp < gDayNightTints[i].timestamp)
+            return i - 1;
+    }
+
+    return i - 1;
+}
+
+void SetDayNightTintColor(s8 minutes, s8 hours, u16 *tintColor, u8 *blendCoeff)
+{
+    int timestamp = (minutes + (hours * 60)) % (NUM_DAYNIGHT_TINTS * DAYNIGHT_INTERVAL);
+    int index = GetDayNightTintIndex(timestamp);
+    const struct DayNightTint *tintA = &gDayNightTints[index];
+    const struct DayNightTint *tintB = &gDayNightTints[(index + 1) % NUM_DAYNIGHT_TINTS];
+
+    // Do linear interpolation for each RGB color.
+    u16 coeff = DAYNIGHT_PRECISION * ((timestamp - tintA->timestamp) / (float)DAYNIGHT_INTERVAL);
+    u16 r = ((tintA->color.r * (DAYNIGHT_PRECISION - coeff)) + (tintB->color.r * coeff)) / DAYNIGHT_PRECISION;
+    u16 g = ((tintA->color.g * (DAYNIGHT_PRECISION - coeff)) + (tintB->color.g * coeff)) / DAYNIGHT_PRECISION;
+    u16 b = ((tintA->color.b * (DAYNIGHT_PRECISION - coeff)) + (tintB->color.b * coeff)) / DAYNIGHT_PRECISION;
+    *tintColor = RGB(r, g, b);
+
+    // Do linear interpolation for the blend coefficient.
+    *blendCoeff = ((tintA->blendCoeff * (DAYNIGHT_PRECISION - coeff)) + (tintB->blendCoeff * coeff)) / DAYNIGHT_PRECISION;
+}
+
+// Blends the specified palettes with a color respective of the time of day.
+void ApplyDayNightTint(u8 startPalIndex, u8 numPalettes)
+{
+    int curPalIndex;
+    u16 blendColor;
+    u8 blendCoeff;
+
+    // Don't tint the palettes if this isn't an outdoors map.
+    if (!Overworld_MapTypeIsOutdoors(gMapHeader.mapType))
+        return;
+
+    SetDayNightTintColor(gLocalTime.seconds, gLocalTime.minutes, &blendColor, &blendCoeff);
+
+    // Loop through each palette and apply the daylight tint as necessary.
+    for (curPalIndex = startPalIndex; curPalIndex < startPalIndex + numPalettes; curPalIndex++)
+    {
+        // Skip certain palettes, such as the ones used for text boxes.
+        if (sBasePaletteGammaTypes[curPalIndex] != GAMMA_NONE)
+        {
+            BlendDayNightPalette(curPalIndex * 16, blendCoeff, blendColor);
+        }
+    }
+}
+
+void TryUpdateDayNightTint(void)
+{
+    if (gSaveBlock2.playTimeVBlanks == 0 && (gSaveBlock2.playTimeSeconds % 1) == 0)
+    {
+        RtcCalcLocalTime();
+        ApplyGammaShift(0, 32, gWeatherPtr->gammaTargetIndex);
+        ApplyDayNightTint(0, 32);
+    }
 }

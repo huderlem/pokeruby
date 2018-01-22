@@ -167,7 +167,6 @@ bool8 LoadDroughtWeatherPalettes(void);
 u8 GetCurrentWeather(void);
 void LoadCustomWeatherSpritePalette(const u16 *palette);
 
-
 extern struct Weather gWeather;
 
 extern struct Weather *const gWeatherPtr;
