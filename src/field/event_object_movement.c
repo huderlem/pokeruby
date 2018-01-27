@@ -1,5 +1,7 @@
+// This file was originally named "evobjmv.c" by Game Freak.
+
 #include "global.h"
-#include "evobjmv.h"
+#include "event_object_movement.h"
 #include "berry.h"
 #include "event_data.h"
 #include "field_camera.h"

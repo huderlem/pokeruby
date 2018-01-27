@@ -1,5 +1,5 @@
-#ifndef GUARD_EVOBJMV_H
-#define GUARD_EVOBJMV_H
+#ifndef GUARD_EVENT_OBJECT_MOVEMENT_H
+#define GUARD_EVENT_OBJECT_MOVEMENT_H
 
 #include "sprite.h"
 
@@ -475,4 +475,4 @@ u8 ZCoordToPriority(u8);
 void FieldObjectUpdateZCoord(struct MapObject *pObject);
 void SetObjectSubpriorityByZCoord(u8, struct Sprite *, u8);
 
-#endif // GUARD_EVOBJMV_H
+#endif // GUARD_EVENT_OBJECT_MOVEMENT_H
