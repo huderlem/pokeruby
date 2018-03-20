@@ -3982,6 +3982,7 @@ static void CreateWildMon(u16 species, u8 b)
 {
     ZeroEnemyPartyMons();
     CreateMonWithNature(&gEnemyParty[0], species, b, 0x20, PickWildMonNature());
+    FlagClear(FLAG_SET_SHINY_MON);
 }
 
 static bool8 GenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 area, bool8 checkRepel)

@@ -623,6 +623,7 @@ bool8 IsPokeSpriteNotFlipped(u16);
 u8 GetLevelUpMovesBySpecies(u16, u16 *);
 u8 TryIncrementMonLevel(struct Pokemon *);
 bool8 IsShiny(struct Pokemon *mon);
+bool8 IsShinyOtIdPersonality(u32 otId, u32 personality);
 void RandomlyGivePartyPokerus(struct Pokemon *party);
 void PartySpreadPokerus(struct Pokemon *party);
 

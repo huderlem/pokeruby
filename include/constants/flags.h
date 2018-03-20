@@ -880,6 +880,8 @@
 
 #define FLAG_LANDMARK_BERRY_MASTERS_HOUSE (SYSTEM_FLAGS + 0x63)
 
+#define FLAG_SET_SHINY_MON (SYSTEM_FLAGS + 0x64)
+
 
 // Daily Flags. These 64 flags are cleared once per day.
 #define DAILY_FLAGS_START (SYSTEM_FLAGS + 0xC0)

@@ -204,6 +204,7 @@ Route101_Movement_14EA58:: @ 814EA58
 
 Route101_EventScript_14EA64:: @ 814EA64
 	msgbox Route101_Text_16D25E, 2
+	setflag FLAG_SET_SHINY_MON
 	end
 
 Route101_EventScript_14EA6D:: @ 814EA6D
