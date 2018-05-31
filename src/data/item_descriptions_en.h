@@ -995,6 +995,11 @@ static const u8 gItemDescription_ContestPass[] = _(
     "for entering\n"
     "POKéMON CONTESTS.");
 
+static const u8 gItemDescription_PokeRadar[] = _(
+    "A tool that can\n"
+    "search out POKéMON\n"
+    "hiding in grass.");
+
 static const u8 gItemDescription_WailmerPail[] = _(
     "A tool used for\n"
     "watering BERRIES\n"

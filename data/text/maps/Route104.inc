@@ -29,11 +29,7 @@ Route104_Text_16DBC9:: @ 816DBC9
 	.string "of their sight.$"
 
 Route104_Text_16DC5F:: @ 816DC5F
-	.string "I like filling my mouth with seeds,\n"
-	.string "then spitting them out fast!\p"
-	.string "You can have this, so you try it out!\p"
-	.string "Use it on a POKéMON, and it will learn\n"
-	.string "a move for firing seeds rapidly.$"
+	.string "Take this radar.$"
 
 Route104_Text_16DD0E:: @ 816DD0E
 	.string "A word of advice!\p"

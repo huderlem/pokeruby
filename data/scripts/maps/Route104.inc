@@ -100,12 +100,10 @@ Route104_EventScript_14EF8A:: @ 814EF8A
 Route104_EventScript_14EF93:: @ 814EF93
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM09, Route104_EventScript_14EFC2
 	msgbox Route104_Text_16DC5F, 4
-	giveitem_std ITEM_TM09_BULLET_SEED
+	giveitem_std ITEM_POKE_RADAR
 	compare RESULT, 0
 	goto_if_eq Route104_EventScript_1A029B
-	setflag FLAG_RECEIVED_TM09
 	release
 	end
 
