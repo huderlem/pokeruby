@@ -24,6 +24,7 @@ void ItemUseOutOfBattle_CoinCase(u8);
 void ItemUseOutOfBattle_SSTicket(u8);
 void sub_80C9D00(u8);
 void ItemUseOutOfBattle_WailmerPail(u8);
+void ItemUseOutOfBattle_PokeRadar(u8);
 void sub_80C9D74(u8);
 void ItemUseOutOfBattle_Medicine(u8);
 void ItemUseOutOfBattle_SacredAsh(u8);
@@ -50,5 +51,6 @@ void ItemUseOutOfBattle_EnigmaBerry(u8);
 void ItemUseInBattle_EnigmaBerry(u8);
 void ItemUseOutOfBattle_CannotUse(u8);
 u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId);
+void DisplayDadsAdviceCannotUseItemMessage(u8 var1, u8 playerMenuStatus);
 
 #endif // GUARD_ITEM_USE_H

@@ -242,12 +242,13 @@ SYMBOL(gUnknown_03005CEC, 4)
 // pokemon_summary_screen.o
 SYMBOL(gUnknown_03005CF0, 4)
 
-// huh?
-. = ALIGN(16);
+// pokeradar.o
+gPokeRadarGrassCoords = .;
+. += 0x10;
 
 // item_menu.c
 gFieldItemUseCallback = .;
-. += 0x10;
+. += 0xC;
 gBagPocketScrollStates = .;
 . += 0x14;
 SYMBOL(gCurrentBagPocketItemSlots, 4)

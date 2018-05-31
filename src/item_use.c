@@ -26,6 +26,7 @@
 #include "pokeblock.h"
 #include "pokemon_item_effect.h"
 #include "pokemon_menu.h"
+#include "pokeradar.h"
 #include "overworld.h"
 #include "rom_8094928.h"
 #include "script.h"
@@ -821,6 +822,15 @@ void sub_80C9D74(u8 taskId)
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(gUnknown_081A168F);
     DestroyTask(taskId);
+}
+
+void ItemUseOutOfBattle_PokeRadar(u8 taskId)
+{
+    if (CanUsePokeRadar(taskId))
+    {
+        gFieldItemUseCallback = (void *)ItemUseOnFieldCB_PokeRadar;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
 }
 
 void sub_80C9D98(u8 taskId)
