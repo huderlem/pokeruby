@@ -1,4 +1,4 @@
-Route121:: @ 8305838
+Route121::
 	.4byte Route121_MapAttributes
 	.4byte Route121_MapEvents
 	.4byte Route121_MapScripts

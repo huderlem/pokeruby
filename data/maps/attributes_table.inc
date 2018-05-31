@@ -1,5 +1,5 @@
 	.align 2
-gMapAttributes:: @ 8304F18
+gMapAttributes::
 	.4byte PetalburgCity_MapAttributes
 	.4byte SlateportCity_MapAttributes
 	.4byte MauvilleCity_MapAttributes
@@ -170,7 +170,7 @@ gMapAttributes:: @ 8304F18
 	.4byte ShoalCave_LowTideLowerRoom_MapAttributes
 	.4byte ShoalCave_HighTideEntranceRoom_MapAttributes
 	.4byte ShoalCave_HighTideInnerRoom_MapAttributes
-	.4byte UnknownMapAttributes_082E55C8 @ unused maps
+	.4byte UnknownMapAttributes_082E55C8
 	.4byte UnknownMapAttributes_082E55EC
 	.4byte UnknownMapAttributes_082E5610
 	.4byte UnknownMapAttributes_082E5634
