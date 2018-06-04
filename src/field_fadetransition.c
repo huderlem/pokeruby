@@ -14,6 +14,7 @@
 #include "event_obj_lock.h"
 #include "metatile_behavior.h"
 #include "palette.h"
+#include "pokeradar.h"
 #include "overworld.h"
 #include "script.h"
 #include "constants/songs.h"
@@ -337,9 +338,16 @@ void task_mpl_807E3C8(u8 taskId)
 {
     if (sub_8080E70() == 1)
     {
-        ScriptContext2_Disable();
-        DestroyTask(taskId);
-        sub_8064E2C();
+        if (gPokeRadarChain.active)
+        {
+            gTasks[taskId].func = Task_StartPokeRadarGrassShake;
+        }
+        else
+        {
+            ScriptContext2_Disable();
+            DestroyTask(taskId);
+            sub_8064E2C();
+        }
     }
 }
 

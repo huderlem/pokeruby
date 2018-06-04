@@ -4167,18 +4167,10 @@ static void GenerateWildPokeRadarMon(const struct WildPokemonInfo *landMonsInfo,
     {
         if (gPokeRadarChain.grassPatches[grassPatch].continueChain)
         {
-            s16 x, y;
             species = gPokeRadarChain.species;
             level = gPokeRadarChain.level;
             forceShiny = gPokeRadarChain.grassPatches[grassPatch].isShiny;
             IncrementPokeRadarChain();
-
-            // Set coordinates for next radar iteration before the battle starts.
-            PlayerGetDestCoords(&x, &y);
-            if (!SetPokeRadarShakeCoords(x, y))
-            {
-                BreakPokeRadarChain();
-            }
         }
         else
         {
@@ -4342,6 +4334,7 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                     if (TestPokeRadarPatches(&radarGrassPatch))
                     {
                         GenerateWildPokeRadarMon(gWildMonHeaders[headerNum].landMonsInfo, gWildMonHeaders[headerNum].pokeRadarMonsInfo, radarGrassPatch);
+                        TrySetPokeRadarPatchCoords();
                         BattleSetup_StartWildBattle();
                         return 1;
                     }

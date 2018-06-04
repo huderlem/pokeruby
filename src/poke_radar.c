@@ -102,7 +102,7 @@ static const RingCoords sPokeRadarRingCoords[] = {
     sFirstRingCoords,
 };
 
-bool8 SetPokeRadarShakeCoords(s16 baseX, s16 baseY)
+bool8 SetPokeRadarPatchCoords(s16 baseX, s16 baseY)
 {
     int i;
     bool8 valid = FALSE;
@@ -168,24 +168,27 @@ static void PrepGrassPatchChainData(void)
     }
 }
 
-void StartPokeRadarGrassShake(void)
+void TrySetPokeRadarPatchCoords(void)
+{
+    // Set coordinates for next radar iteration before the battle starts.
+    if (gPokeRadarChain.active)
+    {
+        s16 x, y;
+        PlayerGetDestCoords(&x, &y);
+        if (!SetPokeRadarPatchCoords(x, y))
+        {
+            BreakPokeRadarChain();
+        }
+    }
+}
+
+static void StartPokeRadarGrassShake(void)
 {
     int i;
-    struct EventObject *playerObj;
-
-    gPokeRadarChain.active = 1;
-
-    playerObj = &gEventObjects[gPlayerAvatar.eventObjectId];
-    if (!SetPokeRadarShakeCoords(playerObj->currentCoords.x, playerObj->currentCoords.y))
-    {
-        // End pokeradar chain because no grass shook.
-        BreakPokeRadarChain();
-        return;
-    }
+    struct EventObject *playerObj = &gEventObjects[gPlayerAvatar.eventObjectId];
 
     // Disable the 4-step wild pokemon immunity.
     DisableWildPokemonImmunity();
-
     PrepGrassPatchChainData();
 
     for (i = 0; i < NUM_POKE_RADAR_GRASS_PATCHES; i++)
@@ -207,13 +210,31 @@ void StartPokeRadarGrassShake(void)
 
 #define tWaitDuration data[0]
 
-void ItemUseOnFieldCB_PokeRadar(u8 taskId)
+void Task_StartPokeRadarGrassShake(u8 taskId)
 {
     ScriptContext2_Enable();
     gPlayerAvatar.preventStep = TRUE;
     StartPokeRadarGrassShake();
     gTasks[taskId].tWaitDuration = 60;
     gTasks[taskId].func = WaitForShakingPokeRadarGrass;
+}
+
+void ItemUseOnFieldCB_PokeRadar(u8 taskId)
+{
+    struct EventObject *playerObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+
+    if (SetPokeRadarPatchCoords(playerObj->currentCoords.x, playerObj->currentCoords.y))
+    {
+        gPokeRadarChain.active = 1;
+    }
+    else
+    {
+        // End pokeradar chain because no grass shook.
+        BreakPokeRadarChain();
+        return;
+    }
+
+    Task_StartPokeRadarGrassShake(taskId);
 }
 
 void WaitForShakingPokeRadarGrass(u8 taskId)

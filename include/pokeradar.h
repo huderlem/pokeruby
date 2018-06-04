@@ -29,6 +29,8 @@ void BreakPokeRadarChain(void);
 void IncrementPokeRadarChain(void);
 void SetPokeRadarPokemon(u16 species, u8 level);
 bool8 CanUsePokeRadar(u8 taskId);
+void TrySetPokeRadarPatchCoords(void);
+void Task_StartPokeRadarGrassShake(u8 taskId);
 void ItemUseOnFieldCB_PokeRadar(u8 taskId);
 void UpdatePokeRadarAfterWildBattle(u8 battleOutcome);
 
