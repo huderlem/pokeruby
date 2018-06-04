@@ -1,5 +1,7 @@
 #include "global.h"
+#include "battle.h"
 #include "event_obj_lock.h"
+#include "field_control_avatar.h"
 #include "field_player_avatar.h"
 #include "field_effect.h"
 #include "fieldmap.h"
@@ -100,27 +102,20 @@ static const RingCoords sPokeRadarRingCoords[] = {
     sFirstRingCoords,
 };
 
-static bool8 SetPokeRadarShakeCoords(s16 baseX, s16 baseY)
+bool8 SetPokeRadarShakeCoords(s16 baseX, s16 baseY)
 {
     int i;
-    bool8 valid;
+    bool8 valid = FALSE;
 
     for (i = 0; i < NUM_POKE_RADAR_GRASS_PATCHES; i++)
     {
         u16 index = (Random() % sNumPatchesInRing[i]);
         gPokeRadarChain.grassPatches[i].x = baseX + sPokeRadarRingCoords[i][index][0];
         gPokeRadarChain.grassPatches[i].y = baseY + sPokeRadarRingCoords[i][index][1];
-    }
+        gPokeRadarChain.grassPatches[i].active = IsValidPokeRadarMetatile(gPokeRadarChain.grassPatches[i].x, gPokeRadarChain.grassPatches[i].y);
 
-    // Check to see if at least one coord is in grass.
-    valid = FALSE;
-    for (i = 0; i < NUM_POKE_RADAR_GRASS_PATCHES; i++)
-    {
-        if (IsValidPokeRadarMetatile(gPokeRadarChain.grassPatches[i].x, gPokeRadarChain.grassPatches[i].y))
-        {
+        if (gPokeRadarChain.grassPatches[i].active)
             valid = TRUE;
-            break;
-        }
     }
 
     return valid;
@@ -156,7 +151,9 @@ static void PrepGrassPatchChainData(void)
     {
         if (gPokeRadarChain.grassPatches[i].active)
         {
-            gPokeRadarChain.grassPatches[i].continueChain = CheckPatchContinuesChain(i, gPokeRadarChain.increasedRates);
+            u8 increasedRates = gBattleResults.caughtPoke != SPECIES_NONE;
+            gPokeRadarChain.grassPatches[i].continueChain = CheckPatchContinuesChain(i, increasedRates);
+
             if (gPokeRadarChain.grassPatches[i].continueChain)
             {
                 gPokeRadarChain.grassPatches[i].patchType = gPokeRadarChain.patchType;
@@ -182,11 +179,12 @@ void StartPokeRadarGrassShake(void)
     if (!SetPokeRadarShakeCoords(playerObj->currentCoords.x, playerObj->currentCoords.y))
     {
         // End pokeradar chain because no grass shook.
-        gPokeRadarChain.species = SPECIES_NONE;
-        gPokeRadarChain.streak = 0;
-        gPokeRadarChain.active = 0;
+        BreakPokeRadarChain();
         return;
     }
+
+    // Disable the 4-step wild pokemon immunity.
+    DisableWildPokemonImmunity();
 
     PrepGrassPatchChainData();
 
@@ -230,4 +228,37 @@ void FinishPokeRadar(u8 taskId)
     gPlayerAvatar.preventStep = FALSE;
     ScriptContext2_Disable();
     DestroyTask(taskId);
+}
+
+void BreakPokeRadarChain(void)
+{
+    int i;
+
+    gPokeRadarChain.streak = 0;
+    gPokeRadarChain.species = 0;
+    gPokeRadarChain.level = 0;
+    gPokeRadarChain.patchType = 0;
+    gPokeRadarChain.active = 0;
+
+    for (i = 0; i < NUM_POKE_RADAR_GRASS_PATCHES; i++)
+    {
+        gPokeRadarChain.grassPatches[i].x = 0;
+        gPokeRadarChain.grassPatches[i].y = 0;
+        gPokeRadarChain.grassPatches[i].patchType = 0;
+        gPokeRadarChain.grassPatches[i].active = 0;
+        gPokeRadarChain.grassPatches[i].continueChain = 0;
+        gPokeRadarChain.grassPatches[i].isShiny = 0;
+    }
+}
+
+void InrementPokeRadarChain(void)
+{
+    if (++gPokeRadarChain.streak > 999)
+        gPokeRadarChain.streak = 999;
+}
+
+void SetPokeRadarPokemon(u16 species, u8 level)
+{
+    gPokeRadarChain.species = species;
+    gPokeRadarChain.level = level;
 }

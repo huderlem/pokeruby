@@ -82,6 +82,8 @@ const s8 gNatureStatTable[][5] =
 #include "data/pokemon/evolution.h"
 #include "data/pokemon/level_up_learnset_pointers.h"
 
+static u32 ForceShinyPersonality(u32 personality);
+
 void ZeroBoxMonData(struct BoxPokemon *boxMon)
 {
     u8 *raw = (u8 *)boxMon;
@@ -232,17 +234,51 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     GiveBoxMonInitialMoveset(boxMon);
 }
 
-void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature)
+void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature, bool8 forceShiny)
 {
     u32 personality;
 
     do
     {
         personality = Random32();
+        if (forceShiny)
+        {
+            personality = ForceShinyPersonality(personality);
+        }
     }
     while (nature != GetNatureFromPersonality(personality));
 
     CreateMon(mon, species, level, fixedIV, 1, personality, 0, 0);
+}
+
+static u32 ForceShinyPersonality(u32 personality)
+{
+    int currentBit;
+    u32 playerOT = gSaveBlock2.playerTrainerId[0]
+                | (gSaveBlock2.playerTrainerId[1] << 8)
+                | (gSaveBlock2.playerTrainerId[2] << 16)
+                | (gSaveBlock2.playerTrainerId[3] << 24);
+    u16 otVal = (playerOT >> 16) ^ (playerOT & 0xFFFF);
+
+    u16 bitSelector = Random();
+    u16 personalityVal = (personality >> 16) ^ (personality & 0xFFFF);
+    for (currentBit = 3; currentBit < 16; currentBit++)
+    {
+        int shiftedBit = 1 << currentBit;
+        int otBitSet = (otVal & shiftedBit) != 0;
+        int personalityBitSet = (personalityVal & shiftedBit) != 0;
+        if (otBitSet + personalityBitSet == 1)
+        {
+            // Bits are different, so let's arbitrarily flip one of them such
+            // that the XOR of the folded OT and personality values will be 0.
+            if (bitSelector & shiftedBit)
+                personality ^= shiftedBit;
+            else
+                personality ^= (shiftedBit << 16);
+        }
+    }
+
+    return personality;
 }
 
 void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 gender, u8 nature, u8 unownLetter)

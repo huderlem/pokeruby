@@ -8,6 +8,7 @@
 #include "constants/maps.h"
 #include "metatile_behavior.h"
 #include "pokeblock.h"
+#include "pokeradar.h"
 #include "random.h"
 #include "roamer.h"
 #include "overworld.h"
@@ -3980,8 +3981,15 @@ static u8 PickWildMonNature(void)
 
 static void CreateWildMon(u16 species, u8 b)
 {
+    BreakPokeRadarChain();
     ZeroEnemyPartyMons();
-    CreateMonWithNature(&gEnemyParty[0], species, b, 0x20, PickWildMonNature());
+    CreateMonWithNature(&gEnemyParty[0], species, b, 0x20, PickWildMonNature(), 0);
+}
+
+static void CreateWildRadarMon(u16 species, u8 level, bool8 forceShiny)
+{
+    ZeroEnemyPartyMons();
+    CreateMonWithNature(&gEnemyParty[0], species, level, 0x20, PickWildMonNature(), forceShiny);
 }
 
 static bool8 GenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 area, bool8 checkRepel)
@@ -4003,12 +4011,89 @@ static bool8 GenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 area,
     }
     level = ChooseWildMonLevel(&wildMonInfo->wildPokemon[wildMonIndex]);
     if (checkRepel == TRUE && IsWildLevelAllowedByRepel(level) == FALSE)
+    {
         return FALSE;
+    }
     else
     {
         CreateWildMon(wildMonInfo->wildPokemon[wildMonIndex].species, level);
         return TRUE;
     }
+}
+
+static void GenerateWildPokeRadarMon(const struct WildPokemonInfo *wildMonInfo, u8 grassPatch)
+{
+    u16 species;
+    u8 level;
+    u8 forceShiny = 0;
+    
+    if (gPokeRadarChain.streak > 0)
+    {
+        if (gPokeRadarChain.grassPatches[grassPatch].continueChain)
+        {
+            s16 x, y;
+            species = gPokeRadarChain.species;
+            level = gPokeRadarChain.level;
+            forceShiny = gPokeRadarChain.grassPatches[grassPatch].isShiny;
+            InrementPokeRadarChain();
+
+            // Set coordinates for next radar iteration before the battle starts.
+            PlayerGetDestCoords(&x, &y);
+            if (!SetPokeRadarShakeCoords(x, y))
+            {
+                BreakPokeRadarChain();
+            }
+        }
+        else
+        {
+            u8 wildMonIndex = ChooseWildMonIndex_Land();
+            species = wildMonInfo->wildPokemon[wildMonIndex].species;
+            if (species == gPokeRadarChain.species)
+            {
+                level = gPokeRadarChain.level;
+                gPokeRadarChain.patchType = gPokeRadarChain.grassPatches[grassPatch].patchType;
+                InrementPokeRadarChain();
+            }
+            else
+            {
+                BreakPokeRadarChain();
+                level = ChooseWildMonLevel(&wildMonInfo->wildPokemon[wildMonIndex]);
+            }
+        }
+    }
+    else
+    {
+        u8 wildMonIndex = ChooseWildMonIndex_Land();
+        species = wildMonInfo->wildPokemon[wildMonIndex].species;
+        level = ChooseWildMonLevel(&wildMonInfo->wildPokemon[wildMonIndex]);
+        SetPokeRadarPokemon(species, level);
+        InrementPokeRadarChain();
+    }
+
+    CreateWildRadarMon(species, level, forceShiny);
+}
+
+static bool8 TestPokeRadarPatches(u8 *grassPatch)
+{
+    int i;
+    s16 x, y;
+
+    if (!gPokeRadarChain.active)
+        return FALSE;
+
+    PlayerGetDestCoords(&x, &y);
+    for (i = 0; i < NUM_POKE_RADAR_GRASS_PATCHES; i++)
+    {
+        if (gPokeRadarChain.grassPatches[i].active
+            && gPokeRadarChain.grassPatches[i].x == x
+            && gPokeRadarChain.grassPatches[i].y == y)
+        {
+            *grassPatch = i;
+            return TRUE;
+        }
+    }
+
+    return FALSE;
 }
 
 static u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 rod)
@@ -4117,7 +4202,14 @@ bool8 StandardWildEncounter(u16 a, u16 b)
         headerNum = GetCurrentMapWildMonHeader();
         if (headerNum != 0xFFFF)
         {
-            if (MetatileBehavior_IsLandWildEncounter(a) == TRUE)
+            u8 radarGrassPatch;
+            if (TestPokeRadarPatches(&radarGrassPatch))
+            {
+                GenerateWildPokeRadarMon(gWildMonHeaders[headerNum].landMonsInfo, radarGrassPatch);
+                BattleSetup_StartWildBattle();
+                return 1;
+            }
+            else if (MetatileBehavior_IsLandWildEncounter(a) == TRUE)
             {
                 if (gWildMonHeaders[headerNum].landMonsInfo)
                 {

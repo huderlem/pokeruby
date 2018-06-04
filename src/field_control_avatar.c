@@ -631,6 +631,11 @@ void prev_quest_postbuffer_cursor_backup_reset(void)
     gUnknown_0202E8C0 = 0;
 }
 
+void DisableWildPokemonImmunity(void)
+{
+    gUnknown_0202E8C0 = 4;
+}
+
 static bool8 is_it_battle_time_3(u16 a)
 {
     if (gUnknown_0202E8C0 < 4)
