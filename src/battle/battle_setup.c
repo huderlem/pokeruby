@@ -16,6 +16,7 @@
 #include "metatile_behavior.h"
 #include "constants/opponents.h"
 #include "palette.h"
+#include "pokeradar.h"
 #include "random.h"
 #include "overworld.h"
 #include "safari_zone.h"
@@ -619,6 +620,7 @@ static void CB2_EndWildBattle(void)
 {
     CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);
     ResetOamRange(0, 128);
+    UpdatePokeRadarAfterWildBattle(gBattleOutcome);
 
     if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {

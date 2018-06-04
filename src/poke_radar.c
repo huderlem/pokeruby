@@ -262,3 +262,25 @@ void SetPokeRadarPokemon(u16 species, u8 level)
     gPokeRadarChain.species = species;
     gPokeRadarChain.level = level;
 }
+
+void UpdatePokeRadarAfterWildBattle(u8 battleOutcome)
+{
+    if (gPokeRadarChain.active)
+    {
+        switch (battleOutcome)
+        {
+        case BATTLE_LOST:
+        case BATTLE_DREW:
+        case BATTLE_RAN:
+        case BATTLE_PLAYER_TELEPORTED:
+        case BATTLE_POKE_FLED:
+        case BATTLE_OUT_OF_BALLS:
+        case BATTLE_OPPONENT_TELEPORTED:
+            BreakPokeRadarChain();
+            break;
+        case BATTLE_CAUGHT:
+            gPokeRadarChain.increasedRates = 1;
+            break;
+        }
+    }
+}
