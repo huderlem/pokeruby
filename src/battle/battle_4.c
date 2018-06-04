@@ -17,6 +17,7 @@
 #include "pokemon.h"
 #include "text.h"
 #include "palette.h"
+#include "pokeradar.h"
 #include "main.h"
 #include "constants/songs.h"
 #include "sound.h"
@@ -15817,6 +15818,7 @@ static void atkF0_givecaughtmon(void)
 {
     GiveMonToPlayer(&gEnemyParty[gBattlerPartyIndexes[gBankAttacker ^ 1]]);
     gBattleResults.caughtPoke = gBattleMons[gBankAttacker ^ 1].species;
+    gPokeRadarChain.increasedRates = gBattleResults.caughtPoke != SPECIES_NONE;
     GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBankAttacker ^ 1]], MON_DATA_NICKNAME, gBattleResults.caughtNick);
     gBattlescriptCurrInstr++;
 }

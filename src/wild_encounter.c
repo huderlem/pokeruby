@@ -2326,6 +2326,15 @@ const struct WildPokemon Route121_FishingMons [] =
 };
 const struct WildPokemonInfo Route121_FishingMonsInfo = {30, Route121_FishingMons};
 
+const struct WildPokemon Route121_PokeRadarMons[] =
+{
+    {10, 11, SPECIES_GROWLITHE},
+    {12, 13, SPECIES_VULPIX},
+    {14, 15, SPECIES_SQUIRTLE},
+    {16, 17, SPECIES_CHARMANDER},
+};
+const struct WildPokemonInfo Route121_PokeRadarMonsInfo = {22, Route121_PokeRadarMons};
+
 const struct WildPokemon Route122_WaterMons [] =
 {
     {5, 35, SPECIES_TENTACOOL},
@@ -2908,6 +2917,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &PetalburgCity_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &PetalburgCity_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SLATEPORT_CITY),
@@ -2916,6 +2926,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &SlateportCity_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &SlateportCity_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(LILYCOVE_CITY),
@@ -2924,6 +2935,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &LilycoveCity_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &LilycoveCity_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(MOSSDEEP_CITY),
@@ -2932,6 +2944,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &MossdeepCity_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &MossdeepCity_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SOOTOPOLIS_CITY),
@@ -2940,6 +2953,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &SootopolisCity_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &SootopolisCity_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(EVER_GRANDE_CITY),
@@ -2948,6 +2962,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &EverGrandeCity_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &EverGrandeCity_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(METEOR_FALLS_1F_1R),
@@ -2956,6 +2971,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &MeteorFalls_1F_1R_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &MeteorFalls_1F_1R_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(METEOR_FALLS_1F_2R),
@@ -2964,6 +2980,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &MeteorFalls_1F_2R_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &MeteorFalls_1F_2R_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(METEOR_FALLS_B1F_1R),
@@ -2972,6 +2989,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &MeteorFalls_B1F_1R_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &MeteorFalls_B1F_1R_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(METEOR_FALLS_B1F_2R),
@@ -2980,6 +2998,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &MeteorFalls_B1F_2R_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &MeteorFalls_B1F_2R_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(RUSTURF_TUNNEL),
@@ -2988,6 +3007,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(GRANITE_CAVE_1F),
@@ -2996,6 +3016,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(GRANITE_CAVE_B1F),
@@ -3004,6 +3025,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(GRANITE_CAVE_B2F),
@@ -3012,6 +3034,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = &GraniteCave_B2F_RockSmashMonsInfo,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(GRANITE_CAVE_STEVENS_ROOM),
@@ -3020,6 +3043,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(PETALBURG_WOODS),
@@ -3028,6 +3052,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(JAGGED_PASS),
@@ -3036,6 +3061,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(FIERY_PATH),
@@ -3044,6 +3070,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(MT_PYRE_1F),
@@ -3052,6 +3079,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(MT_PYRE_2F),
@@ -3060,6 +3088,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(MT_PYRE_3F),
@@ -3068,6 +3097,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(MT_PYRE_4F),
@@ -3076,6 +3106,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(MT_PYRE_5F),
@@ -3084,6 +3115,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(MT_PYRE_6F),
@@ -3092,6 +3124,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(MT_PYRE_EXTERIOR),
@@ -3100,6 +3133,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(MT_PYRE_SUMMIT),
@@ -3108,6 +3142,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SEAFLOOR_CAVERN_ENTRANCE),
@@ -3116,6 +3151,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &SeafloorCavern_Entrance_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &SeafloorCavern_Entrance_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SEAFLOOR_CAVERN_ROOM1),
@@ -3124,6 +3160,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SEAFLOOR_CAVERN_ROOM2),
@@ -3132,6 +3169,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SEAFLOOR_CAVERN_ROOM3),
@@ -3140,6 +3178,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SEAFLOOR_CAVERN_ROOM4),
@@ -3148,6 +3187,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SEAFLOOR_CAVERN_ROOM5),
@@ -3156,6 +3196,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SEAFLOOR_CAVERN_ROOM6),
@@ -3164,6 +3205,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &SeafloorCavern_Room6_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &SeafloorCavern_Room6_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SEAFLOOR_CAVERN_ROOM7),
@@ -3172,6 +3214,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &SeafloorCavern_Room7_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &SeafloorCavern_Room7_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SEAFLOOR_CAVERN_ROOM8),
@@ -3180,6 +3223,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(CAVE_OF_ORIGIN_ENTRANCE),
@@ -3188,6 +3232,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(CAVE_OF_ORIGIN_1F),
@@ -3196,6 +3241,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(CAVE_OF_ORIGIN_B1F),
@@ -3204,6 +3250,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(CAVE_OF_ORIGIN_B2F),
@@ -3212,6 +3259,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(CAVE_OF_ORIGIN_B3F),
@@ -3220,6 +3268,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(VICTORY_ROAD_1F),
@@ -3228,6 +3277,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(VICTORY_ROAD_B1F),
@@ -3236,6 +3286,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = &VictoryRoad_B1F_RockSmashMonsInfo,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(VICTORY_ROAD_B2F),
@@ -3244,6 +3295,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &VictoryRoad_B2F_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &VictoryRoad_B2F_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM),
@@ -3252,6 +3304,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &ShoalCave_LowTideEntranceRoom_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &ShoalCave_LowTideEntranceRoom_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SHOAL_CAVE_LOW_TIDE_INNER_ROOM),
@@ -3260,6 +3313,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &ShoalCave_LowTideInnerRoom_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &ShoalCave_LowTideInnerRoom_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM),
@@ -3268,6 +3322,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SHOAL_CAVE_LOW_TIDE_LOWER_ROOM),
@@ -3276,6 +3331,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SHOAL_CAVE_LOW_TIDE_ICE_ROOM),
@@ -3284,6 +3340,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(NEW_MAUVILLE_ENTRANCE),
@@ -3292,6 +3349,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(NEW_MAUVILLE_INSIDE),
@@ -3300,6 +3358,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ABANDONED_SHIP_ROOMS_B1F),
@@ -3308,6 +3367,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &AbandonedShip_Rooms_B1F_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &AbandonedShip_Rooms_B1F_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS),
@@ -3316,6 +3376,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &AbandonedShip_HiddenFloorCorridors_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &AbandonedShip_HiddenFloorCorridors_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SKY_PILLAR_1F),
@@ -3324,6 +3385,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SKY_PILLAR_3F),
@@ -3332,6 +3394,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SKY_PILLAR_5F),
@@ -3340,6 +3403,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE101),
@@ -3348,6 +3412,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE102),
@@ -3356,6 +3421,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route102_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route102_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE103),
@@ -3364,6 +3430,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route103_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route103_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE104),
@@ -3372,6 +3439,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route104_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route104_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE105),
@@ -3380,6 +3448,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route105_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route105_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE106),
@@ -3388,6 +3457,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route106_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route106_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE107),
@@ -3396,6 +3466,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route107_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route107_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE108),
@@ -3404,6 +3475,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route108_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route108_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE109),
@@ -3412,6 +3484,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route109_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route109_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE110),
@@ -3420,6 +3493,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route110_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route110_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE111),
@@ -3428,6 +3502,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route111_WaterMonsInfo,
         .rockSmashMonsInfo = &Route111_RockSmashMonsInfo,
         .fishingMonsInfo = &Route111_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE112),
@@ -3436,6 +3511,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE113),
@@ -3444,6 +3520,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE114),
@@ -3452,6 +3529,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route114_WaterMonsInfo,
         .rockSmashMonsInfo = &Route114_RockSmashMonsInfo,
         .fishingMonsInfo = &Route114_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE115),
@@ -3460,6 +3538,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route115_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route115_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE116),
@@ -3468,6 +3547,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE117),
@@ -3476,6 +3556,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route117_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route117_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE118),
@@ -3484,6 +3565,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route118_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route118_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE119),
@@ -3492,6 +3574,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route119_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route119_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE120),
@@ -3500,6 +3583,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route120_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route120_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE121),
@@ -3508,6 +3592,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route121_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route121_FishingMonsInfo,
+        .pokeRadarMonsInfo = &Route121_PokeRadarMonsInfo,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE122),
@@ -3516,6 +3601,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route122_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route122_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE123),
@@ -3524,6 +3610,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route123_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route123_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE124),
@@ -3532,6 +3619,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route124_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route124_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE125),
@@ -3540,6 +3628,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route125_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route125_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE126),
@@ -3548,6 +3637,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route126_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route126_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE127),
@@ -3556,6 +3646,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route127_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route127_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE128),
@@ -3564,6 +3655,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route128_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route128_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE129),
@@ -3572,6 +3664,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route129_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route129_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE130),
@@ -3580,6 +3673,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route130_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route130_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE131),
@@ -3588,6 +3682,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route131_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route131_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE132),
@@ -3596,6 +3691,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route132_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route132_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE133),
@@ -3604,6 +3700,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route133_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route133_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(ROUTE134),
@@ -3612,6 +3709,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Route134_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &Route134_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SAFARI_ZONE_NORTHWEST),
@@ -3620,6 +3718,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &SafariZone_Northwest_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &SafariZone_Northwest_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SAFARI_ZONE_NORTHEAST),
@@ -3628,6 +3727,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = &SafariZone_Northeast_RockSmashMonsInfo,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SAFARI_ZONE_SOUTHWEST),
@@ -3636,6 +3736,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &SafariZone_Southwest_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &SafariZone_Southwest_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(SAFARI_ZONE_SOUTHEAST),
@@ -3644,6 +3745,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(DEWFORD_TOWN),
@@ -3652,6 +3754,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &DewfordTown_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &DewfordTown_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(PACIFIDLOG_TOWN),
@@ -3660,6 +3763,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &PacifidlogTown_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = &PacifidlogTown_FishingMonsInfo,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(UNDERWATER1),
@@ -3668,6 +3772,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Underwater1_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(UNDERWATER2),
@@ -3676,6 +3781,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = &Underwater2_WaterMonsInfo,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
     {
         .mapGroup = MAP_GROUP(UNDEFINED),
@@ -3684,6 +3790,7 @@ const struct WildPokemonHeader gWildMonHeaders[] =
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,
         .fishingMonsInfo = NULL,
+        .pokeRadarMonsInfo = NULL,
     },
 };
 
@@ -3906,6 +4013,19 @@ static u8 ChooseWildMonIndex_Fishing(u8 rod)
     return wildMonIndex;
 }
 
+static u8 ChooseWildMonIndex_PokeRadar()
+{
+    u8 rand = Random() % 100;
+
+    if (rand < 45) // 45% chance
+        return 0;
+    if (rand < 90) // 45% chance
+        return 1;
+    if (rand < 95) // 5% chance
+        return 2;
+    return 3;      // 5% chance
+}
+
 static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
 {
     u8 min;
@@ -4021,7 +4141,23 @@ static bool8 GenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 area,
     }
 }
 
-static void GenerateWildPokeRadarMon(const struct WildPokemonInfo *wildMonInfo, u8 grassPatch)
+static void ChoosePokeRadarWildMon(const struct WildPokemonInfo *landMonsInfo, const struct WildPokemonInfo *pokeRadarMonsInfo, u16 *species, u8 *level)
+{
+    if (pokeRadarMonsInfo != NULL && (Random() % 100) < pokeRadarMonsInfo->encounterRate)
+    {
+        u8 wildMonIndex = ChooseWildMonIndex_PokeRadar();
+        *species = pokeRadarMonsInfo->wildPokemon[wildMonIndex].species;
+        *level = ChooseWildMonLevel(&pokeRadarMonsInfo->wildPokemon[wildMonIndex]);
+    }
+    else
+    {
+        u8 wildMonIndex = ChooseWildMonIndex_Land();
+        *species = landMonsInfo->wildPokemon[wildMonIndex].species;
+        *level = ChooseWildMonLevel(&landMonsInfo->wildPokemon[wildMonIndex]);
+    }
+}
+
+static void GenerateWildPokeRadarMon(const struct WildPokemonInfo *landMonsInfo, const struct WildPokemonInfo *pokeRadarMonsInfo, u8 grassPatch)
 {
     u16 species;
     u8 level;
@@ -4035,7 +4171,7 @@ static void GenerateWildPokeRadarMon(const struct WildPokemonInfo *wildMonInfo, 
             species = gPokeRadarChain.species;
             level = gPokeRadarChain.level;
             forceShiny = gPokeRadarChain.grassPatches[grassPatch].isShiny;
-            InrementPokeRadarChain();
+            IncrementPokeRadarChain();
 
             // Set coordinates for next radar iteration before the battle starts.
             PlayerGetDestCoords(&x, &y);
@@ -4046,28 +4182,24 @@ static void GenerateWildPokeRadarMon(const struct WildPokemonInfo *wildMonInfo, 
         }
         else
         {
-            u8 wildMonIndex = ChooseWildMonIndex_Land();
-            species = wildMonInfo->wildPokemon[wildMonIndex].species;
+            ChoosePokeRadarWildMon(landMonsInfo, pokeRadarMonsInfo, &species, &level);
             if (species == gPokeRadarChain.species)
             {
                 level = gPokeRadarChain.level;
                 gPokeRadarChain.patchType = gPokeRadarChain.grassPatches[grassPatch].patchType;
-                InrementPokeRadarChain();
+                IncrementPokeRadarChain();
             }
             else
             {
                 BreakPokeRadarChain();
-                level = ChooseWildMonLevel(&wildMonInfo->wildPokemon[wildMonIndex]);
             }
         }
     }
     else
     {
-        u8 wildMonIndex = ChooseWildMonIndex_Land();
-        species = wildMonInfo->wildPokemon[wildMonIndex].species;
-        level = ChooseWildMonLevel(&wildMonInfo->wildPokemon[wildMonIndex]);
+        ChoosePokeRadarWildMon(landMonsInfo, pokeRadarMonsInfo, &species, &level);
         SetPokeRadarPokemon(species, level);
-        InrementPokeRadarChain();
+        IncrementPokeRadarChain();
     }
 
     CreateWildRadarMon(species, level, forceShiny);
@@ -4202,17 +4334,18 @@ bool8 StandardWildEncounter(u16 a, u16 b)
         headerNum = GetCurrentMapWildMonHeader();
         if (headerNum != 0xFFFF)
         {
-            u8 radarGrassPatch;
-            if (TestPokeRadarPatches(&radarGrassPatch))
-            {
-                GenerateWildPokeRadarMon(gWildMonHeaders[headerNum].landMonsInfo, radarGrassPatch);
-                BattleSetup_StartWildBattle();
-                return 1;
-            }
-            else if (MetatileBehavior_IsLandWildEncounter(a) == TRUE)
+            if (MetatileBehavior_IsLandWildEncounter(a) == TRUE)
             {
                 if (gWildMonHeaders[headerNum].landMonsInfo)
                 {
+                    u8 radarGrassPatch;
+                    if (TestPokeRadarPatches(&radarGrassPatch))
+                    {
+                        GenerateWildPokeRadarMon(gWildMonHeaders[headerNum].landMonsInfo, gWildMonHeaders[headerNum].pokeRadarMonsInfo, radarGrassPatch);
+                        BattleSetup_StartWildBattle();
+                        return 1;
+                    }
+
                     if (b != a && !DoGlobalWildEncounterDiceRoll())
                         return 0;
 

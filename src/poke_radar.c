@@ -151,8 +151,8 @@ static void PrepGrassPatchChainData(void)
     {
         if (gPokeRadarChain.grassPatches[i].active)
         {
-            u8 increasedRates = gBattleResults.caughtPoke != SPECIES_NONE;
-            gPokeRadarChain.grassPatches[i].continueChain = CheckPatchContinuesChain(i, increasedRates);
+            gPokeRadarChain.grassPatches[i].continueChain = CheckPatchContinuesChain(i, gPokeRadarChain.increasedRates);
+            gPokeRadarChain.increasedRates = 0;
 
             if (gPokeRadarChain.grassPatches[i].continueChain)
             {
@@ -251,7 +251,7 @@ void BreakPokeRadarChain(void)
     }
 }
 
-void InrementPokeRadarChain(void)
+void IncrementPokeRadarChain(void)
 {
     if (++gPokeRadarChain.streak > 999)
         gPokeRadarChain.streak = 999;

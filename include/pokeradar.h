@@ -18,6 +18,7 @@ struct PokeRadarChain {
     u8 level;
     u8 patchType;
     u8 active;
+    u8 increasedRates;
     struct PokeRadarGrassPatch grassPatches[NUM_POKE_RADAR_GRASS_PATCHES];
 };
 
@@ -25,7 +26,7 @@ extern struct PokeRadarChain gPokeRadarChain;
 
 bool8 SetPokeRadarShakeCoords(s16 baseX, s16 baseY);
 void BreakPokeRadarChain(void);
-void InrementPokeRadarChain(void);
+void IncrementPokeRadarChain(void);
 void SetPokeRadarPokemon(u16 species, u8 level);
 bool8 CanUsePokeRadar(u8 taskId);
 void ItemUseOnFieldCB_PokeRadar(u8 taskId);
