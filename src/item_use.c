@@ -200,6 +200,7 @@ void ItemUseOutOfBattle_Bike(u8 taskId)
 
 void ItemUseOnFieldCB_Bike(u8 taskId)
 {
+    BreakPokeRadarChain();
     if (ItemId_GetSecondaryId(gSpecialVar_ItemId) == 0)
         GetOnOffBike(2);
     if (ItemId_GetSecondaryId(gSpecialVar_ItemId) == 1)
