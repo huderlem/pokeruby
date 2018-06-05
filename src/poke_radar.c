@@ -6,11 +6,15 @@
 #include "field_effect.h"
 #include "fieldmap.h"
 #include "global.fieldmap.h"
+#include "item_menu.h"
 #include "item_use.h"
 #include "metatile_behavior.h"
+#include "menu_helpers.h"
 #include "pokeradar.h"
 #include "random.h"
 #include "script.h"
+#include "strings.h"
+#include "text.h"
 #include "constants/field_effects.h"
 #include "constants/species.h"
 
@@ -237,7 +241,7 @@ void ItemUseOnFieldCB_PokeRadar(u8 taskId)
     {
         // End pokeradar chain because no grass shook.
         BreakPokeRadarChain();
-        FinishPokeRadar(taskId);
+        DisplayItemMessageOnField(taskId, gPokeRadar_GrassRemainedSilent, CleanUpOverworldMessage, 0);
         return;
     }
 

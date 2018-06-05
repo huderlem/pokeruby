@@ -1850,3 +1850,6 @@ const u8 gSystemText_NoSaveFileNoTime[] = _("Es existiert kein Speicherstand. Uh
 const u8 gSystemText_ClockAdjustmentUsable[] = _("Das spielinterne Zeiteingabe-\nSystem ist jetzt verfügbar.");
 const u8 gSystemText_Saving[] = _("SPEICHERVORGANG...\nGERÄT NICHT AUSSCHALTEN!");
 #endif
+
+// pokeradar
+const u8 gPokeRadar_GrassRemainedSilent[] = _("The grassy patch remained\nsilent...{PAUSE_UNTIL_PRESS}");
