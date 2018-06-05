@@ -21,7 +21,7 @@
 static void WaitForShakingPokeRadarGrass(u8 taskId);
 static void FinishPokeRadar(u8 taskId);
 
-bool8 IsValidPokeRadarMetatile(s16 x, s16 y)
+static bool8 IsValidPokeRadarMetatile(s16 x, s16 y)
 {
     u16 tileBehavior;
     s16 gridX, gridY;
@@ -53,9 +53,6 @@ bool8 CanUsePokeRadar(u8 taskId)
         DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[2]);
         return FALSE;
     }
-
-    // PokeRadar must be fully charged.
-    // TODO:
 
     return TRUE;
 }
@@ -270,13 +267,13 @@ void ItemUseOnFieldCB_PokeRadar(u8 taskId)
     }
 }
 
-void WaitForShakingPokeRadarGrass(u8 taskId)
+static void WaitForShakingPokeRadarGrass(u8 taskId)
 {
     if (--gTasks[taskId].tWaitDuration < 0)
         FinishPokeRadar(taskId);
 }
 
-void FinishPokeRadar(u8 taskId)
+static void FinishPokeRadar(u8 taskId)
 {
     sub_8064E2C();
     gPlayerAvatar.preventStep = FALSE;
