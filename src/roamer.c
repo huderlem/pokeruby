@@ -2,6 +2,7 @@
 #include "debug.h"
 #include "roamer.h"
 #include "pokemon.h"
+#include "pokeradar.h"
 #include "random.h"
 #include "region_map.h"
 #include "constants/species.h"
@@ -176,6 +177,8 @@ void CreateRoamerMonInstance(void)
     SetMonData(mon, MON_DATA_CUTE, &roamer->cute);
     SetMonData(mon, MON_DATA_SMART, &roamer->smart);
     SetMonData(mon, MON_DATA_TOUGH, &roamer->tough);
+
+    BreakPokeRadarChain();
 }
 
 bool8 TryStartRoamerEncounter(void)
