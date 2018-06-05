@@ -894,4 +894,100 @@ const struct SpriteTemplate gFieldEffectSpriteTemplate_Sparkle = {0xFFFF, 0x100F
 
 const struct SpritePalette gFieldEffectObjectPaletteInfo3 = {gFieldEffectObjectPalette3, 0x100F};
 
+const struct SpriteFrameImage gFieldEffectPicTable_PokeRadarGrass0[] = {
+    obj_frame_tiles(gFieldEffectPic_PokeRadarGrass0_0),
+    obj_frame_tiles(gFieldEffectPic_PokeRadarGrass0_1),
+    obj_frame_tiles(gFieldEffectPic_PokeRadarGrass0_2),
+};
+
+const union AnimCmd gFieldEffectAnim_PokeRadarGrass0[] = {
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_FRAME(2, 5),
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_FRAME(2, 5),
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_FRAME(2, 5),
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_PokeRadarGrass0[] = {
+    gFieldEffectAnim_PokeRadarGrass0
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_PokeRadarGrass0 = {0xFFFF, 0x1005, &gFieldOamData_16x16, gFieldEffectAnimTable_PokeRadarGrass0, gFieldEffectPicTable_PokeRadarGrass0, gDummySpriteAffineAnimTable, unc_grass_normal};
+
+const struct SpriteFrameImage gFieldEffectPicTable_PokeRadarGrass1[] = {
+    obj_frame_tiles(gFieldEffectPic_PokeRadarGrass1_0),
+    obj_frame_tiles(gFieldEffectPic_PokeRadarGrass1_1),
+    obj_frame_tiles(gFieldEffectPic_PokeRadarGrass1_2),
+    obj_frame_tiles(gFieldEffectPic_PokeRadarGrass1_3),
+    obj_frame_tiles(gFieldEffectPic_PokeRadarGrass1_4)
+};
+
+const union AnimCmd gFieldEffectAnim_PokeRadarGrass1[] = {
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_FRAME(2, 5),
+    ANIMCMD_FRAME(3, 5),
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_FRAME(2, 5),
+    ANIMCMD_FRAME(3, 5),
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_PokeRadarGrass1[] = {
+    gFieldEffectAnim_PokeRadarGrass1
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_PokeRadarGrass1 = {0xFFFF, 0x1005, &gFieldOamData_16x16, gFieldEffectAnimTable_PokeRadarGrass1, gFieldEffectPicTable_PokeRadarGrass1, gDummySpriteAffineAnimTable, unc_grass_normal};
+
+const struct SpriteFrameImage gFieldEffectPicTable_PokeRadarGrassShiny[] = {
+    obj_frame_tiles(gFieldEffectPic_PokeRadarGrassShiny_0),
+    obj_frame_tiles(gFieldEffectPic_PokeRadarGrassShiny_1),
+    obj_frame_tiles(gFieldEffectPic_PokeRadarGrassShiny_2),
+    obj_frame_tiles(gFieldEffectPic_PokeRadarGrassShiny_3),
+};
+
+const union AnimCmd gFieldEffectAnim_PokeRadarGrassShiny[] = {
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(1, 3),
+    ANIMCMD_FRAME(2, 3),
+    ANIMCMD_FRAME(1, 3),
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(1, 3),
+    ANIMCMD_FRAME(2, 3),
+    ANIMCMD_FRAME(1, 3),
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(3, 10),
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(1, 3),
+    ANIMCMD_FRAME(2, 3),
+    ANIMCMD_FRAME(1, 3),
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(1, 3),
+    ANIMCMD_FRAME(2, 3),
+    ANIMCMD_FRAME(1, 3),
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gFieldEffectAnimTable_PokeRadarGrassShiny[] = {
+    gFieldEffectAnim_PokeRadarGrassShiny
+};
+
+const struct SpriteTemplate gFieldEffectSpriteTemplate_PokeRadarGrassShiny = {0xFFFF, 0x100A, &gFieldOamData_16x16, gFieldEffectAnimTable_PokeRadarGrassShiny, gFieldEffectPicTable_PokeRadarGrassShiny, gDummySpriteAffineAnimTable, unc_grass_normal};
+
+const struct SpritePalette gFieldEffectObjectPaletteInfo_PokeRadarGrassShiny = {gFieldEffectObjectPalette_PokeRadarGrassShiny, 0x100A};
+
 #endif //POKERUBY_FIELD_EFFECT_OBJECTS_H

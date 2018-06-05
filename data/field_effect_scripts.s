@@ -70,6 +70,9 @@ gFieldEffectScriptPointers:: @ 81D9B34
 	.4byte gFieldEffectScript_SecretBasePCTurnOn
 	.4byte gFieldEffectScript_HallOfFameRecord
 	.4byte gFieldEffectScript_UseTeleport
+	.4byte gFieldEffectScript_PokeRadarGrass0
+	.4byte gFieldEffectScript_PokeRadarGrass1
+	.4byte gFieldEffectScript_PokeRadarGrassShiny
 
 gFieldEffectScript_ExclamationMarkIcon: @ 81D9C34
 	callnative FldEff_ExclamationMarkIcon
@@ -328,4 +331,16 @@ gFieldEffectScript_HallOfFameRecord: @ 81D9E32
 
 gFieldEffectScript_UseTeleport: @ 81D9E41
 	callnative FldEff_UseTeleport
+	end
+
+gFieldEffectScript_PokeRadarGrass0:
+	loadfadedpal_callnative gFieldEffectObjectPaletteInfo1, FldEff_PokeRadarGrass0
+	end
+
+gFieldEffectScript_PokeRadarGrass1:
+	loadfadedpal_callnative gFieldEffectObjectPaletteInfo1, FldEff_PokeRadarGrass1
+	end
+
+gFieldEffectScript_PokeRadarGrassShiny:
+	loadfadedpal_callnative gFieldEffectObjectPaletteInfo_PokeRadarGrassShiny, FldEff_PokeRadarGrassShiny
 	end

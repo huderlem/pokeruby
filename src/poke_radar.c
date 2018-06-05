@@ -203,7 +203,13 @@ static void StartPokeRadarGrassShake(void)
             gFieldEffectArguments[5] = playerObj->mapGroup;
             gFieldEffectArguments[6] = (u8)gSaveBlock1.location.mapNum << 8 | (u8)gSaveBlock1.location.mapGroup;
             gFieldEffectArguments[7] = 0;
-            FieldEffectStart(FLDEFF_TALL_GRASS);
+
+            if (gPokeRadarChain.grassPatches[i].isShiny)
+                FieldEffectStart(FLDEFF_POKERADAR_GRASS_SHINY);
+            else if (gPokeRadarChain.grassPatches[i].patchType == 0)
+                FieldEffectStart(FLDEFF_POKERADAR_GRASS_0);
+            else
+                FieldEffectStart(FLDEFF_POKERADAR_GRASS_1);
         }
     }
 }

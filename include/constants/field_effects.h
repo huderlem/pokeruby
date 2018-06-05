@@ -65,5 +65,8 @@
 #define FLDEFF_SECRET_BASE_PC_TURN_ON    61
 #define FLDEFF_HALL_OF_FAME_RECORD       62
 #define FLDEFF_USE_TELEPORT              63
+#define FLDEFF_POKERADAR_GRASS_0         64
+#define FLDEFF_POKERADAR_GRASS_1         65
+#define FLDEFF_POKERADAR_GRASS_SHINY     66
 
 #endif

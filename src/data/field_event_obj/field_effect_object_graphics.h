@@ -145,5 +145,18 @@ const u32 gFieldEffectPic_Sparkle_0[] = INCBIN_U32("graphics/field_effect_object
 const u32 gFieldEffectPic_Sparkle_1[] = INCBIN_U32("graphics/field_effect_objects/pics/sparkle/1.4bpp");
 const u16 gFieldEffectObjectPalette3[] = INCBIN_U16("graphics/field_effect_objects/palettes/03.gbapal");
 const u32 gFieldEffectPic_Bird[] = INCBIN_U32("graphics/field_effect_objects/pics/bird.4bpp");
+const u32 gFieldEffectPic_PokeRadarGrass0_0[] = INCBIN_U32("graphics/field_effect_objects/pics/pokeradar_grass_0/0.4bpp");
+const u32 gFieldEffectPic_PokeRadarGrass0_1[] = INCBIN_U32("graphics/field_effect_objects/pics/pokeradar_grass_0/1.4bpp");
+const u32 gFieldEffectPic_PokeRadarGrass0_2[] = INCBIN_U32("graphics/field_effect_objects/pics/pokeradar_grass_0/2.4bpp");
+const u32 gFieldEffectPic_PokeRadarGrass1_0[] = INCBIN_U32("graphics/field_effect_objects/pics/pokeradar_grass_1/0.4bpp");
+const u32 gFieldEffectPic_PokeRadarGrass1_1[] = INCBIN_U32("graphics/field_effect_objects/pics/pokeradar_grass_1/1.4bpp");
+const u32 gFieldEffectPic_PokeRadarGrass1_2[] = INCBIN_U32("graphics/field_effect_objects/pics/pokeradar_grass_1/2.4bpp");
+const u32 gFieldEffectPic_PokeRadarGrass1_3[] = INCBIN_U32("graphics/field_effect_objects/pics/pokeradar_grass_1/3.4bpp");
+const u32 gFieldEffectPic_PokeRadarGrass1_4[] = INCBIN_U32("graphics/field_effect_objects/pics/pokeradar_grass_1/4.4bpp");
+const u32 gFieldEffectPic_PokeRadarGrassShiny_0[] = INCBIN_U32("graphics/field_effect_objects/pics/pokeradar_grass_shiny/0.4bpp");
+const u32 gFieldEffectPic_PokeRadarGrassShiny_1[] = INCBIN_U32("graphics/field_effect_objects/pics/pokeradar_grass_shiny/1.4bpp");
+const u32 gFieldEffectPic_PokeRadarGrassShiny_2[] = INCBIN_U32("graphics/field_effect_objects/pics/pokeradar_grass_shiny/2.4bpp");
+const u32 gFieldEffectPic_PokeRadarGrassShiny_3[] = INCBIN_U32("graphics/field_effect_objects/pics/pokeradar_grass_shiny/3.4bpp");
+const u16 gFieldEffectObjectPalette_PokeRadarGrassShiny[] = INCBIN_U16("graphics/field_effect_objects/palettes/pokeradar_grass_shiny.gbapal");
 
 #endif // POKERUBY_FIELD_EFFECT_OBJECT_GFX_H
