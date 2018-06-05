@@ -15,6 +15,7 @@
 #include "item_menu.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
+#include "pokeradar.h"
 #include "safari_zone.h"
 #include "script.h"
 #include "secret_base.h"
@@ -552,6 +553,7 @@ bool8 sub_8068894(void)
 {
     IncrementRematchStepCounter();
     happiness_algorithm_step();
+    ChargePokeRadar();
     if (overworld_poison_step() == TRUE)
     {
         ScriptContext1_SetupScript(gUnknown_081A14B8);

@@ -2,6 +2,7 @@
 #define GUARD_POKERADAR_H
 
 #define NUM_POKE_RADAR_GRASS_PATCHES 4
+#define POKE_RADAR_STEPS_TO_CHARGE 50
 
 struct PokeRadarGrassPatch {
     s16 x;
@@ -19,6 +20,7 @@ struct PokeRadarChain {
     u8 patchType;
     u8 active;
     u8 increasedRates;
+    u8 stepsUntilCharged;
     struct PokeRadarGrassPatch grassPatches[NUM_POKE_RADAR_GRASS_PATCHES];
 };
 
@@ -34,5 +36,6 @@ void Task_StartPokeRadarGrassShake(u8 taskId);
 void ItemUseOnFieldCB_PokeRadar(u8 taskId);
 void UpdatePokeRadarAfterWildBattle(u8 battleOutcome);
 void InitNewPokeRadarStreak(u16 species, u8 level, u8 patchType);
+void ChargePokeRadar(void);
 
 #endif

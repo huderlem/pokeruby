@@ -905,5 +905,7 @@ extern const u8 gSystemText_ClockAdjustmentUsable[];
 extern const u8 gSystemText_Saving[];
 
 extern const u8 gPokeRadar_GrassRemainedSilent[];
+extern const u8 gPokeRadar_StepsUntilCharged[];
+extern const u8 gPokeRadar_StepUntilCharged[];
 
 #endif

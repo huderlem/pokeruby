@@ -224,6 +224,7 @@ void Task_StartPokeRadarGrassShake(u8 taskId)
 {
     ScriptContext2_Enable();
     gPlayerAvatar.preventStep = TRUE;
+    gPokeRadarChain.stepsUntilCharged = POKE_RADAR_STEPS_TO_CHARGE;
     StartPokeRadarGrassShake();
     gTasks[taskId].tWaitDuration = 60;
     gTasks[taskId].func = WaitForShakingPokeRadarGrass;
@@ -231,21 +232,36 @@ void Task_StartPokeRadarGrassShake(u8 taskId)
 
 void ItemUseOnFieldCB_PokeRadar(u8 taskId)
 {
-    struct EventObject *playerObj = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct EventObject *playerObj;
 
+    // Ensure pokeradar is fully-charged.
+    if (gPokeRadarChain.stepsUntilCharged > 0)
+    {
+        if (gPokeRadarChain.stepsUntilCharged == 1)
+        {
+            DisplayItemMessageOnField(taskId, gPokeRadar_StepUntilCharged, CleanUpOverworldMessage, 0);
+        }
+        else
+        {
+            ConvertIntToDecimalStringN(gStringVar1, gPokeRadarChain.stepsUntilCharged, 0, 2);
+            StringExpandPlaceholders(gStringVar4, gPokeRadar_StepsUntilCharged);
+            DisplayItemMessageOnField(taskId, gStringVar4, CleanUpOverworldMessage, 0);
+        }        
+        return;
+    }
+
+    playerObj = &gEventObjects[gPlayerAvatar.eventObjectId];
     if (SetPokeRadarPatchCoords(playerObj->currentCoords.x, playerObj->currentCoords.y))
     {
         gPokeRadarChain.active = 1;
+        Task_StartPokeRadarGrassShake(taskId);
     }
     else
     {
         // End pokeradar chain because no grass shook.
         BreakPokeRadarChain();
         DisplayItemMessageOnField(taskId, gPokeRadar_GrassRemainedSilent, CleanUpOverworldMessage, 0);
-        return;
     }
-
-    Task_StartPokeRadarGrassShake(taskId);
 }
 
 void WaitForShakingPokeRadarGrass(u8 taskId)
@@ -322,4 +338,10 @@ void InitNewPokeRadarStreak(u16 species, u8 level, u8 patchType)
     SetPokeRadarPokemon(species, level);
     gPokeRadarChain.patchType = patchType;
     gPokeRadarChain.streak = 1;
+}
+
+void ChargePokeRadar(void)
+{
+    if (gPokeRadarChain.stepsUntilCharged > 0)
+        gPokeRadarChain.stepsUntilCharged--;
 }

@@ -1852,4 +1852,6 @@ const u8 gSystemText_Saving[] = _("SPEICHERVORGANG...\nGERÄT NICHT AUSSCHALTEN!
 #endif
 
 // pokeradar
-const u8 gPokeRadar_GrassRemainedSilent[] = _("The grassy patch remained\nsilent...{PAUSE_UNTIL_PRESS}");
+const u8 gPokeRadar_GrassRemainedSilent[] = _("The grassy patch remained silent...{PAUSE_UNTIL_PRESS}");
+const u8 gPokeRadar_StepsUntilCharged[] = _("The battery has run dry!\n{STR_VAR_1} steps until fully charged.{PAUSE_UNTIL_PRESS}");
+const u8 gPokeRadar_StepUntilCharged[] = _("The battery has run dry!\n1 step until fully charged.{PAUSE_UNTIL_PRESS}");
