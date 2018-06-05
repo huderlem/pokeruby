@@ -4190,8 +4190,7 @@ static void GenerateWildPokeRadarMon(const struct WildPokemonInfo *landMonsInfo,
     else
     {
         ChoosePokeRadarWildMon(landMonsInfo, pokeRadarMonsInfo, &species, &level);
-        SetPokeRadarPokemon(species, level);
-        IncrementPokeRadarChain();
+        InitNewPokeRadarStreak(species, level, gPokeRadarChain.grassPatches[grassPatch].patchType);
     }
 
     CreateWildRadarMon(species, level, forceShiny);

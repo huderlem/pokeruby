@@ -156,12 +156,12 @@ static void PrepGrassPatchChainData(void)
 
             if (gPokeRadarChain.grassPatches[i].continueChain)
             {
-                gPokeRadarChain.grassPatches[i].patchType = gPokeRadarChain.patchType;
+                gPokeRadarChain.grassPatches[i].patchType = gPokeRadarChain.streak > 0 ? gPokeRadarChain.patchType : (Random() & 1);
                 gPokeRadarChain.grassPatches[i].isShiny = CheckShinyPatch(gPokeRadarChain.streak);
             }
             else
             {
-                gPokeRadarChain.grassPatches[i].patchType = (Random() % 100 < 50);
+                gPokeRadarChain.grassPatches[i].patchType = Random() & 1;
                 gPokeRadarChain.grassPatches[i].isShiny = 0;
             }
         }
@@ -237,6 +237,7 @@ void ItemUseOnFieldCB_PokeRadar(u8 taskId)
     {
         // End pokeradar chain because no grass shook.
         BreakPokeRadarChain();
+        FinishPokeRadar(taskId);
         return;
     }
 
@@ -310,4 +311,11 @@ void UpdatePokeRadarAfterWildBattle(u8 battleOutcome)
             break;
         }
     }
+}
+
+void InitNewPokeRadarStreak(u16 species, u8 level, u8 patchType)
+{
+    SetPokeRadarPokemon(species, level);
+    gPokeRadarChain.patchType = patchType;
+    gPokeRadarChain.streak = 1;
 }
