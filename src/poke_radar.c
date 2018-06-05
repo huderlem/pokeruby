@@ -225,6 +225,11 @@ void Task_StartPokeRadarGrassShake(u8 taskId)
     ScriptContext2_Enable();
     gPlayerAvatar.preventStep = TRUE;
     gPokeRadarChain.stepsUntilCharged = POKE_RADAR_STEPS_TO_CHARGE;
+    gPokeRadarChain.originX = gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.x;
+    gPokeRadarChain.originY = gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.y;
+    gPokeRadarChain.mapGroup = gSaveBlock1.location.mapGroup;
+    gPokeRadarChain.mapNum = gSaveBlock1.location.mapNum;
+
     StartPokeRadarGrassShake();
     gTasks[taskId].tWaitDuration = 60;
     gTasks[taskId].func = WaitForShakingPokeRadarGrass;
@@ -260,6 +265,7 @@ void ItemUseOnFieldCB_PokeRadar(u8 taskId)
     {
         // End pokeradar chain because no grass shook.
         BreakPokeRadarChain();
+        gPokeRadarChain.stepsUntilCharged = POKE_RADAR_STEPS_TO_CHARGE;
         DisplayItemMessageOnField(taskId, gPokeRadar_GrassRemainedSilent, CleanUpOverworldMessage, 0);
     }
 }
@@ -287,6 +293,10 @@ void BreakPokeRadarChain(void)
     gPokeRadarChain.level = 0;
     gPokeRadarChain.patchType = 0;
     gPokeRadarChain.active = 0;
+    gPokeRadarChain.originX = 0;
+    gPokeRadarChain.originY = 0;
+    gPokeRadarChain.mapGroup = 0;
+    gPokeRadarChain.mapNum = 0;
 
     for (i = 0; i < NUM_POKE_RADAR_GRASS_PATCHES; i++)
     {
@@ -342,6 +352,29 @@ void InitNewPokeRadarStreak(u16 species, u8 level, u8 patchType)
 
 void ChargePokeRadar(void)
 {
+    s16 xDiff, yDiff;
+
     if (gPokeRadarChain.stepsUntilCharged > 0)
         gPokeRadarChain.stepsUntilCharged--;
+
+    if (gPokeRadarChain.active)
+    {
+        // Break the pokeradar chain if the player enters a different map.
+        if (gSaveBlock1.location.mapGroup != gPokeRadarChain.mapGroup
+            || gSaveBlock1.location.mapNum != gPokeRadarChain.mapNum)
+        {
+            BreakPokeRadarChain();
+            return;
+        }
+
+        // Break the pokeradar chain if the player walks too far away from the last
+        // radar location.
+        xDiff = abs(gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.x - gPokeRadarChain.originX);
+        yDiff = abs(gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.y - gPokeRadarChain.originY);
+        if (xDiff > 13 || yDiff > 13)
+        {
+            BreakPokeRadarChain();
+            return;
+        }
+    }
 }

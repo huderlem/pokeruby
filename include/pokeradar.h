@@ -20,6 +20,10 @@ struct PokeRadarChain {
     u8 patchType;
     u8 active;
     u8 increasedRates;
+    s16 originX;
+    s16 originY;
+    s8 mapGroup;
+    s8 mapNum;
     u8 stepsUntilCharged;
     struct PokeRadarGrassPatch grassPatches[NUM_POKE_RADAR_GRASS_PATCHES];
 };
