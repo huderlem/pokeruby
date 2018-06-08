@@ -167,7 +167,7 @@ struct MapHeader
     /* 0x15 */ u8 cave;
     /* 0x16 */ u8 weather;
     /* 0x17 */ u8 mapType;
-    /* 0x18 */ u8 filler_18;
+    /* 0x18 */ u8 parallaxLayer;
     /* 0x19 */ u8 escapeRope;
     /* 0x1A */ u8 flags;
     /* 0x1B */ u8 battleType;

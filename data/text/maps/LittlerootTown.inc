@@ -59,8 +59,7 @@ LittlerootTown_Text_16AC56:: @ 816AC56
 	.string "at home?$"
 
 LittlerootTown_Text_16ACEB:: @ 816ACEB
-	.string "If you go in the tall grass at the sides\n"
-	.string "of this road, wild POKéMON will appear.$"
+	.string "Wow! We’re in space!$"
 
 LittlerootTown_Text_16AD3C:: @ 816AD3C
 	.string "It’s not safe to go out there if you\n"

@@ -76,8 +76,17 @@ void sub_8057A58(void)
     *gBGVOffsetRegs[1] = sFieldCameraOffset.yPixelOffset + sVerticalCameraPan + 8;
     *gBGHOffsetRegs[2] = sFieldCameraOffset.xPixelOffset + sHorizontalCameraPan;
     *gBGVOffsetRegs[2] = sFieldCameraOffset.yPixelOffset + sVerticalCameraPan + 8;
-    *gBGHOffsetRegs[3] = sFieldCameraOffset.xPixelOffset + sHorizontalCameraPan;
-    *gBGVOffsetRegs[3] = sFieldCameraOffset.yPixelOffset + sVerticalCameraPan + 8;
+
+    if (gMapHeader.parallaxLayer)
+    {
+        *gBGHOffsetRegs[3] = sFieldCameraOffset.xPixelOffset / 2 + sHorizontalCameraPan;
+        *gBGVOffsetRegs[3] = sFieldCameraOffset.yPixelOffset / 2 + sVerticalCameraPan + 8;
+    }
+    else
+    {
+        *gBGHOffsetRegs[3] = sFieldCameraOffset.xPixelOffset + sHorizontalCameraPan;
+        *gBGVOffsetRegs[3] = sFieldCameraOffset.yPixelOffset + sVerticalCameraPan + 8;
+    }
 
     if (sFieldCameraOffset.copyBGToVRAM)
     {
@@ -249,8 +258,30 @@ static void DrawMetatileAt(struct MapData *mapData, u16 offset, int x, int y)
 
 static void DrawMetatile(s32 metatileLayerType, u16 *metatiles, u16 offset)
 {
+    if (gMapHeader.parallaxLayer)
+        metatileLayerType = 3;
+
     switch (metatileLayerType)
     {
+    case 3: // LAYER_TYPE_PARALLAX
+        // Draw parallax tiles to the bottom background layer.
+        gBGTilemapBuffers[3][offset] = 0x1210;
+        gBGTilemapBuffers[3][offset + 1] = 0x1211;
+        gBGTilemapBuffers[3][offset + 0x20] = 0x1220;
+        gBGTilemapBuffers[3][offset + 0x21] = 0x1221;
+
+        // Draw metatile's bottom layer to the middle background layer.
+        gBGTilemapBuffers[2][offset] = metatiles[0];
+        gBGTilemapBuffers[2][offset + 1] = metatiles[1];
+        gBGTilemapBuffers[2][offset + 0x20] = metatiles[2];
+        gBGTilemapBuffers[2][offset + 0x21] = metatiles[3];
+
+        // Draw metatile's top layer to the top background layer, which covers event object sprites.
+        gBGTilemapBuffers[1][offset] = metatiles[4];
+        gBGTilemapBuffers[1][offset + 1] = metatiles[5];
+        gBGTilemapBuffers[1][offset + 0x20] = metatiles[6];
+        gBGTilemapBuffers[1][offset + 0x21] = metatiles[7];
+        break;
     case 2: // LAYER_TYPE_
         // Draw metatile's bottom layer to the bottom background layer.
         gBGTilemapBuffers[3][offset] = metatiles[0];

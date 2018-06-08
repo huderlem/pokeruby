@@ -186,10 +186,6 @@ LittlerootTown_EventScript_14D6D6:: @ 814D6D6
 LittlerootTown_EventScript_14D6DF:: @ 814D6DF
 	lock
 	faceplayer
-	goto_if_set FLAG_ADVENTURE_STARTED, LittlerootTown_EventScript_14D72F
-	goto_if_set FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_14D722
-	compare VAR_LITTLEROOT_STATE, 0
-	goto_if_ne LittlerootTown_EventScript_14D708
 	msgbox LittlerootTown_Text_16ACEB, 4
 	release
 	end
