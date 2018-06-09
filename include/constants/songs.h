@@ -368,6 +368,8 @@
 #define BGM_BATTLE38 465        // Battle! Elite Four
 #define BGM_BATTLE30 466        // Battle! Archie/Maxie
 
+#define BGM_POKERADAR 468       // PokeRadar
+
 #define BGM_ROUTE_118 0x7FFF  // What is this for?
 
 #endif  // GUARD_CONSTANTS_SONGS_H

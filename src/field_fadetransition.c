@@ -361,7 +361,11 @@ void sub_8080E28(void)
 void sub_8080E44(void)
 {
     ScriptContext2_Enable();
-    Overworld_PlaySpecialMapMusic();
+    if (gPokeRadarChain.active)
+        Overworld_FadeOutMapMusic();
+    else
+        Overworld_PlaySpecialMapMusic();
+
     pal_fill_black();
     CreateTask(task_mpl_807E3C8, 10);
 }

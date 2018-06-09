@@ -468,6 +468,7 @@ gSongTable:: @ 845548C
 	song bgm_battle38, 0, 0              @ Battle! Elite Four
 	song bgm_battle30, 0, 0              @ Battle! Archie/Maxie
 	song bgm_radio_tower_occupied, 0, 0  @ GSC - Radio Tower Takeover!
+	song bgm_pokeradar 0, 0              @ PokeRadar
 
 	.align 2
 dummy_song_header:      @ 845632C

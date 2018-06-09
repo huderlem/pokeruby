@@ -1195,6 +1195,7 @@ SECTIONS {
         sound/songs/bgm_battle38.o(.rodata);
         sound/songs/bgm_battle30.o(.rodata);
         sound/songs/bgm_radio_tower_occupied.o(.rodata);
+        sound/songs/bgm_pokeradar.o(.rodata);
     } =0
 
     lib_rodata :

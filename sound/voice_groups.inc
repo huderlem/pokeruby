@@ -719,7 +719,7 @@ voicegroup_8431B9C:: @ 8431B9C
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8431C8C
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8431C98
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8431CA4
-	voice_square_1 0, 2, 0, 0, 15, 0  @ 8431CB0
+	voice_directsound 60, 0, DirectSoundWaveData_SC88_Marimba, 255, 249, 25, 149  @ 8431CB0
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_NylonStringGuitar, 255, 249, 25, 149  @ 8431CBC
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8431CC8
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8431CD4

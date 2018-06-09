@@ -10,12 +10,15 @@
 #include "item_use.h"
 #include "metatile_behavior.h"
 #include "menu_helpers.h"
+#include "overworld.h"
 #include "pokeradar.h"
 #include "random.h"
 #include "script.h"
+#include "sound.h"
 #include "strings.h"
 #include "text.h"
 #include "constants/field_effects.h"
+#include "constants/songs.h"
 #include "constants/species.h"
 
 static void WaitForShakingPokeRadarGrass(u8 taskId);
@@ -188,6 +191,8 @@ static void StartPokeRadarGrassShake(void)
     int i;
     struct EventObject *playerObj = &gEventObjects[gPlayerAvatar.eventObjectId];
 
+    PlayBGM(BGM_POKERADAR);
+
     // Disable the 4-step wild pokemon immunity.
     DisableWildPokemonImmunity();
     PrepGrassPatchChainData();
@@ -284,6 +289,8 @@ static void FinishPokeRadar(u8 taskId)
 void BreakPokeRadarChain(void)
 {
     int i;
+
+    Overworld_PlaySpecialMapMusic();
 
     gPokeRadarChain.streak = 0;
     gPokeRadarChain.species = 0;
