@@ -11,6 +11,13 @@ struct FieldCamera
     s32 curMovementOffsetY;
 };
 
+struct ParallaxLayer
+{
+	u8 width;
+	u8 height;
+	const u16 *tiles;
+};
+
 extern struct Camera gCamera;
 
 void move_tilemap_camera_to_upper_left_corner(void);

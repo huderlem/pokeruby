@@ -256,19 +256,52 @@ static void DrawMetatileAt(struct MapData *mapData, u16 offset, int x, int y)
     DrawMetatile(MapGridGetMetatileLayerTypeAt(x, y), metatiles + metatileId * 8, offset);
 }
 
+// 1x1 metatile
+const u16 sParallaxBasic[] = {
+    0x1210, 0x1211, 0x1220, 0x1221,
+};
+
+// 2x2 metatile
+const u16 sParallaxMedium[] = {
+    0x2002, 0x2003, 0x2003, 0x2002, 0x21FC, 0x21FD, 0x21FE, 0x21FF,
+    0x2010, 0x2011, 0x2020, 0x2021, 0x2002, 0x2003, 0x2003, 0x2002,
+};
+
+const struct ParallaxLayer sParallaxLayers[] = {
+    {
+        .width = 1,
+        .height = 1,
+        .tiles = sParallaxBasic,
+    },{
+        .width = 2,
+        .height = 2,
+        .tiles = sParallaxMedium,
+    },
+};
+
 static void DrawMetatile(s32 metatileLayerType, u16 *metatiles, u16 offset)
 {
+    const struct ParallaxLayer *parallax;
+    int bgX, bgY;
+    int baseParallaxTile;
+
     if (gMapHeader.parallaxLayer)
+    {
         metatileLayerType = 3;
+        parallax = &sParallaxLayers[gMapHeader.parallaxLayer - 1];
+    }
 
     switch (metatileLayerType)
     {
     case 3: // LAYER_TYPE_PARALLAX
         // Draw parallax tiles to the bottom background layer.
-        gBGTilemapBuffers[3][offset] = 0x1210;
-        gBGTilemapBuffers[3][offset + 1] = 0x1211;
-        gBGTilemapBuffers[3][offset + 0x20] = 0x1220;
-        gBGTilemapBuffers[3][offset + 0x21] = 0x1221;
+        bgX = (offset % 0x20) / 2;
+        bgY = (offset / 0x20) / 2;
+        baseParallaxTile = (bgY % parallax->height) * (parallax->width * 4) + (bgX % parallax->width) * 4;
+        gBGTilemapBuffers[3][offset] = parallax->tiles[baseParallaxTile];
+        gBGTilemapBuffers[3][offset + 1] = parallax->tiles[baseParallaxTile + 1];
+        gBGTilemapBuffers[3][offset + 0x20] = parallax->tiles[baseParallaxTile + 2];
+        gBGTilemapBuffers[3][offset + 0x21] = parallax->tiles[baseParallaxTile + 3];
 
         // Draw metatile's bottom layer to the middle background layer.
         gBGTilemapBuffers[2][offset] = metatiles[0];

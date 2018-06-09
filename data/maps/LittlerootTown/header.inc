@@ -9,6 +9,6 @@ LittlerootTown::
 	.byte 0
 	.byte 2
 	.byte 1
-	.2byte 1
+	.2byte 2
 	.byte 0
 	.byte 1
