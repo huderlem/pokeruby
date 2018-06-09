@@ -39,6 +39,31 @@ static void DrawMetatileAt(struct MapData*, u16, int, int);
 static void DrawMetatile(s32, u16*, u16);
 static void CameraPanningCB_PanAhead(void);
 
+// 1x1 metatile
+const u16 sParallaxBasic[] = {
+    0x1210, 0x1211, 0x1220, 0x1221,
+};
+
+// 2x2 metatile
+const u16 sParallaxMedium[] = {
+    0x2002, 0x2003, 0x2003, 0x2002, 0x21FC, 0x21FD, 0x21FE, 0x21FF,
+    0x2010, 0x2011, 0x2020, 0x2021, 0x2002, 0x2003, 0x2003, 0x2002,
+};
+
+const struct ParallaxLayer sParallaxLayers[] = {
+    {
+        .width = 1,
+        .height = 1,
+        .slowdown = 3,
+        .tiles = sParallaxBasic,
+    },{
+        .width = 2,
+        .height = 2,
+        .slowdown = 2,
+        .tiles = sParallaxMedium,
+    },
+};
+
 static void move_tilemap_camera_to_upper_left_corner_(struct FieldCameraOffset *cameraOffset)
 {
     cameraOffset->xTileOffset = 0;
@@ -79,8 +104,9 @@ void sub_8057A58(void)
 
     if (gMapHeader.parallaxLayer)
     {
-        *gBGHOffsetRegs[3] = sFieldCameraOffset.xPixelOffset / 2 + sHorizontalCameraPan;
-        *gBGVOffsetRegs[3] = sFieldCameraOffset.yPixelOffset / 2 + sVerticalCameraPan + 8;
+        u8 slowdown = sParallaxLayers[gMapHeader.parallaxLayer - 1].slowdown;
+        *gBGHOffsetRegs[3] = sFieldCameraOffset.xPixelOffset / slowdown + sHorizontalCameraPan;
+        *gBGVOffsetRegs[3] = sFieldCameraOffset.yPixelOffset / slowdown + sVerticalCameraPan + 8;
     }
     else
     {
@@ -255,29 +281,6 @@ static void DrawMetatileAt(struct MapData *mapData, u16 offset, int x, int y)
 
     DrawMetatile(MapGridGetMetatileLayerTypeAt(x, y), metatiles + metatileId * 8, offset);
 }
-
-// 1x1 metatile
-const u16 sParallaxBasic[] = {
-    0x1210, 0x1211, 0x1220, 0x1221,
-};
-
-// 2x2 metatile
-const u16 sParallaxMedium[] = {
-    0x2002, 0x2003, 0x2003, 0x2002, 0x21FC, 0x21FD, 0x21FE, 0x21FF,
-    0x2010, 0x2011, 0x2020, 0x2021, 0x2002, 0x2003, 0x2003, 0x2002,
-};
-
-const struct ParallaxLayer sParallaxLayers[] = {
-    {
-        .width = 1,
-        .height = 1,
-        .tiles = sParallaxBasic,
-    },{
-        .width = 2,
-        .height = 2,
-        .tiles = sParallaxMedium,
-    },
-};
 
 static void DrawMetatile(s32 metatileLayerType, u16 *metatiles, u16 offset)
 {
