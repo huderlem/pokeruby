@@ -25,11 +25,6 @@ matrix:
       env: _="Build"
       script:
         - make -j2 ruby
-        - make -j2 ruby_rev1
-        - make -j2 ruby_rev2
-        - make -j2 sapphire
-        - make -j2 sapphire_rev1
-        - make -j2 sapphire_rev2
     - os: linux
       env: _="Build German"
       before_script:
@@ -38,5 +33,5 @@ matrix:
         - rsync -avhI graphics-de/ graphics/
       script:
         - make -j2 ruby_de
-        - make -j2 sapphire_de
-        - make -j2 ruby_de_debug
+after_success:
+  - .travis/calcrom/webhook.sh pokeruby
