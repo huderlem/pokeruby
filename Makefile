@@ -24,8 +24,11 @@ MID2AGB   := tools/mid2agb/mid2agb$(EXE)
 PREPROC   := tools/preproc/preproc$(EXE)
 SCANINC   := tools/scaninc/scaninc$(EXE)
 RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
+ASMGEN    := perl tools/genasmdefines/genasmdefines.pl
 
-ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG)
+BUILD_DIR := build/$(BUILD_NAME)
+
+ASFLAGS  := -mcpu=arm7tdmi -I include -I $(BUILD_DIR) --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG)
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
 CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef -Werror -Wno-trigraphs -D $(GAME_VERSION) -D REVISION=$(GAME_REVISION) -D $(GAME_LANGUAGE) -D DEBUG=$(DEBUG)
 
@@ -34,8 +37,6 @@ CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef -Werror -Wno
 
 ROM := poke$(BUILD_NAME).gba
 MAP := $(ROM:%.gba=%.map)
-
-BUILD_DIR := build/$(BUILD_NAME)
 
 C_SOURCES    := $(wildcard src/*.c src/*/*.c src/*/*/*.c)
 ASM_SOURCES  := $(wildcard src/*.s src/*/*.s asm/*.s data/*.s sound/*.s sound/*/*.s)
@@ -153,6 +154,9 @@ $(BUILD_DIR)/data/%.o: data/%.s $$(ASM_DEP)
 
 $(BUILD_DIR)/%.o: %.s $$(ASM_DEP)
 	$(AS) $(ASFLAGS) $< -o $@
+
+generated/%.inc: include/constants/%.h
+	$(ASMGEN) $< $(BUILD_DIR)/$@
 
 # "friendly" target names for convenience sake
 ruby:          ; @$(MAKE) GAME_VERSION=RUBY
